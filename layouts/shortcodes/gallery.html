@@ -1,0 +1,19 @@
+<div class="gallery-grid">
+	{{ range .Page.Resources.ByType "image" }}
+	{{/* Process image: Resize to 600px width and convert to WebP format */}}
+	{{ $optimized := .Resize "600x webp" }}
+
+	<a class="gallery-link" href="{{ .RelPermalink }}" title="{{ .Name }}">
+		<img src="{{ $optimized.RelPermalink }}" width="{{ $optimized.Width }}" height="{{ $optimized.Height }}"
+			alt="{{ .Name }}" loading="lazy">
+	</a>
+	{{ end }}
+</div>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		if (typeof LuminousGallery !== 'undefined') {
+			new LuminousGallery(document.querySelectorAll(".gallery-link"));
+		}
+	});
+</script>

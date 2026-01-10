@@ -1,0 +1,9 @@
+<div class="about-container">
+	<div class="about-text">
+		{{ .Inner | markdownify }}
+	</div>
+	<div class="about-image">
+		{{ $src := .Get "src" }}
+		<img src="{{ $src | absURL }}" alt="Profile Picture">
+	</div>
+</div>
