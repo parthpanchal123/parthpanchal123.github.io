@@ -84,7 +84,7 @@ params:
 
   # home-info mode
   homeInfoParams:
-    Title: "Hi there \U0001F4B, I'm Parth"
+    Title: "Hi there 👋, I'm Parth"
     Content: |
       #### An Engineer during the week, artist by the weekend.
       Welcome to my personal archive of **_tech_**, **_art_**, and **_photography_**.
