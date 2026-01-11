@@ -3,7 +3,7 @@ title: "About Parth"
 layout: "about"
 date: 2026-01-10
 draft: false
-description: ""
+description: "Hi! I am Parth Panchal. I am a software engineer, artist, and photographer. Explore my technical blog, art sketches, and photography portfolio."
 hideMeta: true
 showTOC: false
 showBreadCrumbs: false

@@ -7,6 +7,7 @@ showTOC: false
 showBreadCrumbs: false
 bodyClass: "gallery-page"
 summary: "A collection of my hand-drawn sketches and creative artwork."
+description: "View hand-drawn sketches and creative artwork by Parth Panchal, showcasing detailed graphite and digital art illustrations."
 comments: false
 ---
 

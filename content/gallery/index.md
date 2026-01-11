@@ -7,6 +7,7 @@ showTOC: false
 showBreadCrumbs: false
 bodyClass: "gallery-page"
 summary: "A portfolio of my photography and captured moments."
+description: "Explore a curated portfolio of photography by Parth Panchal, featuring street photography, portraits, and landscapes."
 comments: false
 ---
 
