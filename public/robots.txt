@@ -1,3 +1,14 @@
 User-agent: *
-Disallow:
-Sitemap: http://localhost:1313/sitemap.xml
+Allow: /
+Disallow: /search/
+Disallow: /tags/
+Disallow: /categories/
+Disallow: /archives/
+
+User-agent: Googlebot-Image
+Allow: /gallery/
+Allow: /sketches/
+Allow: /images/
+
+Sitemap: https://parthpanchal123.github.io/sitemap.xml
+Host: https://parthpanchal123.github.io
