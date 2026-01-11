@@ -1,33 +1,13 @@
 {{- define "main" }}
 
-<style>
-    /* Force Space Grotesk into PaperMod's internal variables */
-    :root {
-        --main-font: 'Space Grotesk', sans-serif;
-        --typography: 'Space Grotesk', sans-serif !important;
-    }
-
-    /* Target every possible text element in the Hub */
-    .hub-container,
-    .hub-container *,
-    .hub-title,
-    .hub-card h3,
-    .hub-text,
-    .hub-section-label,
-    .hub-link {
-        font-family: 'Space Grotesk', sans-serif !important;
-    }
-</style>
-
 {{- partial "home_info.html" . -}}
 
 <div class="hub-container">
-    <h2 class="hub-title">Explore</h2>
     <div class="hub-grid">
 
         <div class="hub-card">
             <div class="hub-icon-wrapper">
-                <span class="hub-icon">💻</span>
+                <span class="hub-icon">≡ƒÆ╗</span>
                 <span class="hub-section-label">Tech</span>
             </div>
             <div class="hub-content">
@@ -36,31 +16,31 @@
                 <p class="hub-text">{{ .Title }}</p>
                 {{ end }}
             </div>
-            <a href="/blog/" class="hub-link">Open Blog →</a>
+            <a href="/blog/" class="hub-link">Open Blog ΓåÆ</a>
         </div>
 
         <div class="hub-card">
             <div class="hub-icon-wrapper">
-                <span class="hub-icon">📸</span>
+                <span class="hub-icon">≡ƒô╕</span>
                 <span class="hub-section-label">Optics</span>
             </div>
             <div class="hub-content">
                 <h3>Clicks</h3>
                 <p class="hub-text">Street, Shadows, Lines & Urban Grit</p>
             </div>
-            <a href="/gallery/" class="hub-link">View Photos →</a>
+            <a href="/gallery/" class="hub-link">View Photos ΓåÆ</a>
         </div>
 
         <div class="hub-card">
             <div class="hub-icon-wrapper">
-                <span class="hub-icon">🖋️</span>
+                <span class="hub-icon">≡ƒÄ¿</span>
                 <span class="hub-section-label">Art</span>
             </div>
             <div class="hub-content">
                 <h3>Sketches</h3>
                 <p class="hub-text">Pencil sketches & Digital Art</p>
             </div>
-            <a href="/sketches/" class="hub-link">Explore Art →</a>
+            <a href="/sketches/" class="hub-link">Explore Art ΓåÆ</a>
         </div>
 
     </div>
@@ -69,26 +49,14 @@
 <style>
     .hub-container {
         max-width: var(--main-width);
-        margin: 40px auto 0;
-    }
-
-    .hub-title {
-        margin: 0 0 24px 0;
-        color: var(--primary);
-        font-size: 1.8rem;
-        font-weight: 700;
+        margin: 40px auto;
+        padding: 0 var(--gap);
     }
 
     .hub-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: var(--gap);
-    }
-
-    @media screen and (max-width: 900px) {
-        .hub-grid {
-            grid-template-columns: 1fr;
-        }
     }
 
     /* Uses PaperMod's native entry background and border */
