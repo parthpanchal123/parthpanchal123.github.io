@@ -29,20 +29,18 @@ params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: Parth's Blog
   description: "Processing the world through 0s and 1s, wide-aperture lenses, and graphite strokes. 🧬 Parth Panchal: Documenting life via clean code, street photography, and creative art."
-  keywords: [Blog, Portfolio, PaperMod]
+  keywords: [Blog, Portfolio, PaperMod, ]
   googleSiteVerification: "G-0ZX5VN6NME"
   author: "Parth Panchal"
-  # author: ["Me", "You"] # multiple authors
   images: ["images/profile.png"]
   DateFormat: "January 2, 2006"
   defaultTheme: auto
   disableThemeToggle: false
-
   ShowReadingTime: true
   ShowShareButtons: false
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
-  ShowCodeCopyButtons: false
+  ShowCodeCopyButtons: true
   ShowWordCount: false
   ShowRssButtonInSectionTermList: true
   UseHugoToc: true
@@ -55,8 +53,6 @@ params:
   tocopen: false
 
   assets:
-    # disableHLJS: true # to disable highlight.js
-    # disableFingerprinting: true
     favicon: "/favicon.ico"
     favicon16x16: "/favicon-16x16.png"
     favicon32x32: "/favicon-32x32.png"
@@ -64,8 +60,6 @@ params:
 
   label:
     text: "Parth's Blog"
-    # icon: /favicon.ico
-    # iconHeight: 35
 
   # profile-mode
   profileMode:
@@ -104,9 +98,9 @@ params:
       SiteVerificationTag: "G-0ZX5VN6NME"
 
   cover:
-    hidden: false # hide everywhere but not in structured data
-    hiddenInList: false # hide on list pages and home
-    hiddenInSingle: false # hide on single page
+    hidden: false
+    hiddenInList: false
+    hiddenInSingle: false
 
   # editPost:
   #   URL: "https://github.com/<path_to_repo>/content"
@@ -124,7 +118,7 @@ params:
     minMatchCharLength: 2
     minmatchcharlength: 2
     ignoreLocation: true
-    limit: 10 # refer: https://www.fusejs.io/api/methods.html#search
+    limit: 10 # refer:
     keys: ["title", "permalink", "summary", "content"]
 
 menu:
@@ -158,8 +152,3 @@ pygmentsUseClasses: true
 markup:
   highlight:
     noClasses: false
-    # anchorLineNos: true
-    # codeFences: true
-    # guessSyntax: true
-    # lineNos: true
-    # style: monokai

@@ -18,9 +18,9 @@ showShareButtons: false
 
 Thanks for stopping by! This website is my personal blog where I:
 
-- Document [**_tech_**](/blog/) that interests me 💻
-- Create [**_sketches_**](/sketches/) that bring ideas to life 🖋️
-- Freeze [**_moments_**](/gallery/) worth remembering 📷
+- Document [**_tech_**](/blog/) that interests me.
+- Create [**_sketches_**](/sketches/) that bring ideas to life.
+- Freeze [**_moments_**](/gallery/) worth remembering.
 
 {{< /about >}}
 
