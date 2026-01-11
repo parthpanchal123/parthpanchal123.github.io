@@ -6,8 +6,8 @@
     <description>Recent content on Parth&#39;s Blog</description>
     <image>
       <title>Parth&#39;s Blog</title>
-      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>http://localhost:1313/images/profile.png</url>
+      <link>http://localhost:1313/images/profile.png</link>
     </image>
     <generator>Hugo -- 0.154.3</generator>
     <language>en</language>
@@ -18,36 +18,21 @@
       <link>http://localhost:1313/about/</link>
       <pubDate>Sat, 10 Jan 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/about/</guid>
-      <description>&lt;div class=&#34;about-container&#34;&gt;
-	&lt;div class=&#34;about-text&#34;&gt;
-		&lt;h3 id=&#34;hi-im-parth&#34;&gt;Hi, I&amp;rsquo;m Parth!&lt;/h3&gt;
-&lt;p&gt;Thanks for stopping by! This website is my personal blog where I:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Document &lt;strong&gt;&lt;em&gt;tech&lt;/em&gt;&lt;/strong&gt; that interests me 💻&lt;/li&gt;
-&lt;li&gt;Create &lt;strong&gt;&lt;em&gt;sketches&lt;/em&gt;&lt;/strong&gt; that bring ideas to life 🖋️&lt;/li&gt;
-&lt;li&gt;Freeze &lt;strong&gt;&lt;em&gt;moments&lt;/em&gt;&lt;/strong&gt; worth remembering 📷&lt;/li&gt;
-&lt;/ul&gt;
-	&lt;/div&gt;
-	&lt;div class=&#34;about-image&#34;&gt;
-		
-		&lt;img src=&#34;http://localhost:1313/images/profile.png&#34; alt=&#34;Profile Picture&#34;&gt;
-	&lt;/div&gt;
-&lt;/div&gt;
-&lt;hr&gt;</description>
+      <description>Hi! I am Parth Panchal. I am a software engineer, artist, and photographer. Explore my technical blog, art sketches, and photography portfolio.</description>
     </item>
     <item>
       <title>My Clicks</title>
       <link>http://localhost:1313/gallery/</link>
       <pubDate>Sat, 10 Jan 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/gallery/</guid>
-      <description>A portfolio of my photography and captured moments.</description>
+      <description>Explore a curated portfolio of photography by Parth Panchal, featuring street photography, portraits, and landscapes.</description>
     </item>
     <item>
       <title>My Sketches</title>
       <link>http://localhost:1313/sketches/</link>
       <pubDate>Sat, 10 Jan 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/sketches/</guid>
-      <description>A collection of my hand-drawn sketches and creative artwork.</description>
+      <description>View hand-drawn sketches and creative artwork by Parth Panchal, showcasing detailed graphite and digital art illustrations.</description>
     </item>
     <item>
       <title>Write your own Circuit Breaker in Java🔌⛓️‍💥</title>

@@ -6,8 +6,8 @@
     <description>Recent content in Thread-Safety on Parth&#39;s Blog</description>
     <image>
       <title>Parth&#39;s Blog</title>
-      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>http://localhost:1313/images/profile.png</url>
+      <link>http://localhost:1313/images/profile.png</link>
     </image>
     <generator>Hugo -- 0.154.3</generator>
     <language>en</language>
