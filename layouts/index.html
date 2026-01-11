@@ -1,157 +1,20 @@
-{{- define "main" }}
-
-{{- partial "home_info.html" . -}}
-
-<div class="hub-container">
-    <h2 class="hub-title">Explore</h2>
-    <div class="hub-grid">
-
-        <div class="hub-card">
-            <div class="hub-icon-wrapper">
-                <span class="hub-icon">💻</span>
-                <span class="hub-section-label">Tech</span>
-            </div>
-            <div class="hub-content">
-                <h3>Blog</h3>
-                {{ range first 1 (where site.RegularPages "Section" "blog") }}
-                <p class="hub-text">{{ .Title }}</p>
-                {{ end }}
-            </div>
-            <a href="/blog/" class="hub-link">Open Blog →</a>
-        </div>
-
-        <div class="hub-card">
-            <div class="hub-icon-wrapper">
-                <span class="hub-icon">📸</span>
-                <span class="hub-section-label">Optics</span>
-            </div>
-            <div class="hub-content">
-                <h3>Clicks</h3>
-                <p class="hub-text">Street, Shadows, Lines & Urban Grit</p>
-            </div>
-            <a href="/gallery/" class="hub-link">View Photos →</a>
-        </div>
-
-        <div class="hub-card">
-            <div class="hub-icon-wrapper">
-                <span class="hub-icon">🎨</span>
-                <span class="hub-section-label">Art</span>
-            </div>
-            <div class="hub-content">
-                <h3>Sketches</h3>
-                <p class="hub-text">Pencil sketches & Digital Art</p>
-            </div>
-            <a href="/sketches/" class="hub-link">Explore Art →</a>
-        </div>
-
-    </div>
-</div>
-
 <style>
-    .hub-container {
-        max-width: var(--main-width);
-        margin: 60px auto 40px auto;
-        padding: 0;
+    /* Force Space Grotesk into PaperMod's internal variables */
+    :root {
+        --main-font: 'Space Grotesk', sans-serif;
+        --typography: 'Space Grotesk', sans-serif !important;
     }
 
-    .hub-title {
-        font-size: 1.8rem;
-        margin-bottom: 20px;
-        color: var(--primary);
-    }
-
-    .hub-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: var(--gap);
-    }
-
-    @media (max-width: 768px) {
-        .hub-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    /* Uses PaperMod's native entry background and border */
-    .hub-card {
-        background: var(--entry);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 24px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        /* Ensures footer link stays at bottom */
-        height: 100%;
-        /* Makes all cards same height */
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .hub-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .hub-icon-wrapper {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 16px;
-    }
-
-    /* Small tile for icon using PaperMod's code block background style */
-    .hub-icon {
-        font-size: 1.2rem;
-        background: var(--code-bg);
-        padding: 8px;
-        border-radius: 8px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 40px;
-        height: 40px;
-    }
-
-    .hub-section-label {
-        font-size: 0.75rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        color: var(--secondary);
-    }
-
-    .hub-card h3 {
-        margin: 0 0 8px 0;
-        color: var(--primary);
-        font-size: 1.5rem;
-    }
-
-    /* Container for the text content to ensure it pushes the link down */
-    .hub-content {
-        flex-grow: 1;
-        margin-bottom: 16px;
-    }
-
-    .hub-text {
-        color: var(--secondary);
-        font-size: 0.95rem;
-        line-height: 1.5;
-        margin: 0;
-    }
-
-    /* Link color uses PaperMod's primary theme color */
+    /* Target every possible text element in the Hub */
+    .hub-container,
+    .hub-container *,
+    .hub-title,
+    .hub-card h3,
+    .hub-text,
+    .hub-section-label,
     .hub-link {
-        font-weight: 600;
-        font-size: 0.9rem;
-        color: var(--primary) !important;
-        /* Changed from var(--theme) to visible color */
-        text-decoration: none;
-        display: inline-block;
+        font-family: 'Space Grotesk', sans-serif !important;
     }
 
-    .hub-link:hover {
-        text-decoration: underline;
-    }
+    /* Rest of your existing CSS below... */
 </style>
-
-{{- end }}
