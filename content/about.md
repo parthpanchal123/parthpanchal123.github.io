@@ -1,11 +1,15 @@
 ---
-title: ""
+title: "About Parth"
+layout: "about"
 date: 2026-01-10
 draft: false
 description: ""
 hideMeta: true
 showTOC: false
 showBreadCrumbs: false
+comments: false
+bodyClass: "about"
+showShareButtons: false
 ---
 
 {{< about src="/images/profile.png" >}}
@@ -14,9 +18,9 @@ showBreadCrumbs: false
 
 Thanks for stopping by! This website is my personal blog where I:
 
-- Document tech that interests me 💻
-- Create sketches that bring ideas to life 🖋️
-- Freeze moments worth remembering 📷
+- Document **_tech_** that interests me 💻
+- Create **_sketches_** that bring ideas to life 🖋️
+- Freeze **_moments_** worth remembering 📷
 
 {{< /about >}}
 

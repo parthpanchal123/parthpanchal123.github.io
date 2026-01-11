@@ -13,7 +13,8 @@ h5,
 h6 {
   font-family: "Space Grotesk", sans-serif !important;
   font-weight: 700 !important;
-  letter-spacing: -0.02em; /* This gives it that modern, tight look */
+  letter-spacing: -0.02em;
+  /* This gives it that modern, tight look */
 }
 
 /* Ensure the main body text also updates */
@@ -31,7 +32,8 @@ body {
 .post-tags a::before {
   content: "#";
   margin-right: 1px;
-  color: var(--secondary); /* Optional: makes the # a different color */
+  color: var(--secondary);
+  /* Optional: makes the # a different color */
 }
 
 /* Container for the menu */
@@ -46,7 +48,8 @@ body {
   font-size: 1.1rem;
   font-weight: 500;
   margin-left: 20px;
-  transition: all 0.3s ease; /* Smooth transition */
+  transition: all 0.3s ease;
+  /* Smooth transition */
   position: relative;
   text-decoration: none !important;
   opacity: 0.8;
@@ -55,7 +58,8 @@ body {
 /* Hover state */
 .menu a:hover {
   opacity: 1;
-  transform: translateY(-2px); /* Slight lift up */
+  transform: translateY(-2px);
+  /* Slight lift up */
   color: var(--primary) !important;
 }
 
@@ -83,71 +87,153 @@ body {
 }
 
 .logo a:hover {
-  background: none !important; /* Removes the default grey background on hover */
+  background: none !important;
+  /* Removes the default grey background on hover */
 }
 
 /* Layout container */
+/* Layout container with Animation */
 .about-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 40px;
-  margin-top: 2rem;
+  gap: 3rem;
+  margin-top: 1rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease-out forwards;
 }
 
 /* Text styling */
 .about-text {
-  flex: 2; /* Takes up more space */
+  flex: 1.5;
   font-family: "Space Grotesk", sans-serif;
-  font-size: 1.1rem;
-  line-height: 1.6;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--content);
+}
+
+.about-text h3 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(120deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.about-text ul {
+  list-style: none;
+  /* Remove default bullets */
+  padding: 0;
+  margin-top: 1.5rem;
+}
+
+.about-text li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.about-text li::before {
+  content: "→";
+  /* Custom arrow bullet */
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: bold;
 }
 
 /* Image container styling */
 .about-image {
-  flex: 1; /* Takes up less space */
+  flex: 1;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
-/* Making the image a circle */
+/* Profile Image Styling */
 .about-image img {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%; /* Makes it a circle */
-  object-fit: cover; /* Prevents stretching */
-  border: 0px solid var(--primary); /* Optional: adds a ring around the photo */
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--tertiary);
+  /* Subtle border matching theme */
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.2);
+  /* Soft shadow */
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* Responsive fix: Stack them on mobile phones */
-@media (max-width: 768px) {
+.about-image img:hover {
+  transform: scale(1.05) rotate(2deg);
+  box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.3);
+}
+
+/* Fade Up Animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive: Stack gracefully on smaller screens */
+@media (max-width: 850px) {
   .about-container {
     flex-direction: column-reverse;
     text-align: center;
+    gap: 2rem;
+  }
+
+  .about-text {
+    width: 100%;
+  }
+
+  .about-text ul {
+    display: inline-block;
+    /* Keeps list left-aligned but centered block */
+    text-align: left;
+  }
+
+  .about-image img {
+    width: 180px;
+    height: 180px;
   }
 }
 
 /* The container that creates the columns */
 .gallery-grid {
-  column-count: 3; /* Number of columns on desktop */
-  column-gap: 15px; /* Space between columns */
+  column-count: 3;
+  /* Number of columns on desktop */
+  column-gap: 15px;
+  /* Space between columns */
   width: 100%;
   margin: 2rem 0;
 }
 
 /* Individual items in the gallery */
 .gallery-link {
-  display: inline-block; /* Essential for masonry to prevent breaking across columns */
-  margin-bottom: 15px; /* Space between images vertically */
+  display: inline-block;
+  /* Essential for masonry to prevent breaking across columns */
+  margin-bottom: 15px;
+  /* Space between images vertically */
   width: 100%;
   border-radius: 12px;
   overflow: hidden;
-  background: var(--tertiary); /* Loading placeholder color */
+  background: var(--tertiary);
+  /* Loading placeholder color */
 }
 
 .gallery-link img {
   width: 100%;
-  height: auto; /* Maintains original aspect ratio like Pinterest */
+  height: auto;
+  /* Maintains original aspect ratio like Pinterest */
   display: block;
   transition: transform 0.4s ease;
 }
@@ -180,7 +266,8 @@ body {
   background: none !important;
   padding: 0 !important;
   border: none !important;
-  box-shadow: none !important; /* Removes any shadow if present */
+  box-shadow: none !important;
+  /* Removes any shadow if present */
 }
 
 /* Optional: Add a subtle rounded corner to keep it modern */
@@ -190,7 +277,8 @@ body {
 
 /* Fix for the unwanted "extended" space under images */
 .gallery-grid img {
-  display: block; /* This is the most important line */
+  display: block;
+  /* This is the most important line */
   vertical-align: bottom;
   margin: 0;
   padding: 0;
@@ -206,7 +294,8 @@ body {
 
 /* 1. Create the Pinterest Columns */
 .gallery-grid {
-  column-count: 3; /* 3 columns on desktop */
+  column-count: 3;
+  /* 3 columns on desktop */
   column-gap: 15px;
   width: 100%;
   margin: 2rem 0;
@@ -214,20 +303,26 @@ body {
 
 /* 2. Style the Image Containers */
 .gallery-link {
-  display: inline-block; /* Crucial for masonry */
+  display: inline-block;
+  /* Crucial for masonry */
   width: 100%;
-  margin-bottom: 15px; /* Gap between images vertically */
+  margin-bottom: 15px;
+  /* Gap between images vertically */
   border-radius: 12px;
   overflow: hidden;
-  line-height: 0; /* Removes the "extended part" below images */
-  background: none !important; /* Removes default PaperMod gray background */
-  padding: 0 !important; /* Removes default PaperMod padding */
+  line-height: 0;
+  /* Removes the "extended part" below images */
+  background: none !important;
+  /* Removes default PaperMod gray background */
+  padding: 0 !important;
+  /* Removes default PaperMod padding */
 }
 
 /* 3. Style the Images themselves */
 .gallery-grid img {
   width: 100% !important;
-  height: auto !important; /* Allows images to keep their natural height */
+  height: auto !important;
+  /* Allows images to keep their natural height */
   display: block;
   margin: 0 !important;
   padding: 0 !important;
@@ -241,6 +336,7 @@ body {
     column-count: 2;
   }
 }
+
 @media (max-width: 500px) {
   .gallery-grid {
     column-count: 1;
@@ -249,7 +345,8 @@ body {
 
 /* 1. Make the main container wide ONLY on the gallery page */
 .gallery-page .main {
-  max-width: 95% !important; /* Utilizes almost full screen width */
+  max-width: 95% !important;
+  /* Utilizes almost full screen width */
   margin: 0 auto;
 }
 
@@ -303,17 +400,21 @@ body {
 
 /* 2. The Column Layout (This creates the Pinterest "stagger") */
 .gallery-page .gallery-grid {
-  column-count: 4; /* Number of columns on wide screens */
-  column-gap: 20px; /* Space between columns */
+  column-count: 4;
+  /* Number of columns on wide screens */
+  column-gap: 20px;
+  /* Space between columns */
   width: 100%;
   margin: 2rem 0;
 }
 
 /* 3. The individual image containers */
 .gallery-page .gallery-link {
-  display: inline-block; /* Critical: prevents images from splitting across columns */
+  display: inline-block;
+  /* Critical: prevents images from splitting across columns */
   width: 100%;
-  margin-bottom: 20px; /* Space between images vertically */
+  margin-bottom: 20px;
+  /* Space between images vertically */
   border-radius: 12px;
   overflow: hidden;
   line-height: 0;
@@ -323,7 +424,8 @@ body {
 
 .gallery-page .gallery-grid img {
   width: 100% !important;
-  height: auto !important; /* Let images keep their natural varied heights */
+  height: auto !important;
+  /* Let images keep their natural varied heights */
   display: block;
   transition: transform 0.4s ease;
   border: none !important;
@@ -346,5 +448,37 @@ body {
 @media (max-width: 500px) {
   .gallery-page .gallery-grid {
     column-count: 1;
+  }
+}
+
+/* Mobile Spacing Fixes */
+@media (max-width: 768px) {
+
+  /* Reduce excessive padding in the navigation menu */
+  .nav {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  /* Reduce the gap between the menu and the page title/content */
+  .post-header {
+    margin-top: 0px !important;
+    margin-bottom: 10px !important;
+  }
+
+  /* Reduce the top margin of the content to pull it closer */
+  .post-content {
+    margin-top: 0px;
+  }
+
+  /* Optional: Adjust main container padding if necessary */
+  .main {
+    padding-top: 0;
+  }
+
+  /* Reduce about container top margin */
+  .about-container {
+    margin-top: 0;
+    /* Removed extra margin on mobile since gap handles it */
   }
 }

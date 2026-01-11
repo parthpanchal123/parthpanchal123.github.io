@@ -1,0 +1,130 @@
+{{- define "main" }}
+
+{{- partial "home_info.html" . -}}
+
+<div class="hub-container">
+    <div class="hub-grid">
+
+        <div class="hub-card">
+            <div class="hub-icon-wrapper">
+                <span class="hub-icon">💻</span>
+                <span class="hub-section-label">Tech</span>
+            </div>
+            <div class="hub-content">
+                <h3>Blog</h3>
+                {{ range first 1 (where site.RegularPages "Section" "blog") }}
+                <p class="hub-text">{{ .Title }}</p>
+                {{ end }}
+            </div>
+            <a href="/blog/" class="hub-link">Open Blog →</a>
+        </div>
+
+        <div class="hub-card">
+            <div class="hub-icon-wrapper">
+                <span class="hub-icon">📸</span>
+                <span class="hub-section-label">Optics</span>
+            </div>
+            <div class="hub-content">
+                <h3>Clicks</h3>
+                <p class="hub-text">Street, Shadows, Lines & Urban Grit</p>
+            </div>
+            <a href="/gallery/" class="hub-link">View Photos →</a>
+        </div>
+
+        <div class="hub-card">
+            <div class="hub-icon-wrapper">
+                <span class="hub-icon">🎨</span>
+                <span class="hub-section-label">Art</span>
+            </div>
+            <div class="hub-content">
+                <h3>Sketches</h3>
+                <p class="hub-text">Pencil sketches & Digital Art</p>
+            </div>
+            <a href="/sketches/" class="hub-link">Explore Art →</a>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .hub-container {
+        max-width: var(--main-width);
+        margin: 40px auto;
+        padding: 0 var(--gap);
+    }
+
+    .hub-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--gap);
+    }
+
+    /* Uses PaperMod's native entry background and border */
+    .hub-card {
+        background: var(--entry);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .hub-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .hub-icon-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    /* Small tile for icon using PaperMod's code block background style */
+    .hub-icon {
+        font-size: 1.2rem;
+        background: var(--code-bg);
+        padding: 8px;
+        border-radius: 8px;
+        display: flex;
+    }
+
+    .hub-section-label {
+        font-size: 0.75rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--secondary);
+    }
+
+    .hub-card h3 {
+        margin: 0 0 8px 0;
+        color: var(--primary);
+        font-size: 1.5rem;
+    }
+
+    .hub-text {
+        color: var(--secondary);
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 20px;
+        min-height: 45px;
+    }
+
+    /* Link color uses PaperMod's primary theme color */
+    .hub-link {
+        margin-top: auto;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--theme) !important;
+        text-decoration: none;
+    }
+
+    .hub-link:hover {
+        text-decoration: underline;
+    }
+</style>
+
+{{- end }}

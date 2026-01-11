@@ -6,6 +6,8 @@ hideMeta: true
 showTOC: false
 showBreadCrumbs: false
 bodyClass: "gallery-page"
+summary: "A collection of my hand-drawn sketches and creative artwork."
+comments: false
 ---
 
 {{< gallery >}}

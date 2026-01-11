@@ -6,6 +6,8 @@ hideMeta: true
 showTOC: false
 showBreadCrumbs: false
 bodyClass: "gallery-page"
+summary: "A portfolio of my photography and captured moments."
+comments: false
 ---
 
 {{< gallery >}}
