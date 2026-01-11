@@ -3,6 +3,7 @@
 {{- partial "home_info.html" . -}}
 
 <div class="hub-container">
+    <h2 class="hub-title">Explore</h2>
     <div class="hub-grid">
 
         <div class="hub-card">
@@ -49,14 +50,26 @@
 <style>
     .hub-container {
         max-width: var(--main-width);
-        margin: 40px auto;
-        padding: 0 var(--gap);
+        margin: 60px auto 40px auto;
+        padding: 0;
+    }
+
+    .hub-title {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: var(--primary);
     }
 
     .hub-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-template-columns: repeat(3, 1fr);
         gap: var(--gap);
+    }
+
+    @media (max-width: 768px) {
+        .hub-grid {
+            grid-template-columns: 1fr;
+        }
     }
 
     /* Uses PaperMod's native entry background and border */
@@ -67,6 +80,10 @@
         padding: 24px;
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
+        /* Ensures footer link stays at bottom */
+        height: 100%;
+        /* Makes all cards same height */
         transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
@@ -89,6 +106,10 @@
         padding: 8px;
         border-radius: 8px;
         display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
     }
 
     .hub-section-label {
@@ -105,21 +126,27 @@
         font-size: 1.5rem;
     }
 
+    /* Container for the text content to ensure it pushes the link down */
+    .hub-content {
+        flex-grow: 1;
+        margin-bottom: 16px;
+    }
+
     .hub-text {
         color: var(--secondary);
         font-size: 0.95rem;
         line-height: 1.5;
-        margin-bottom: 20px;
-        min-height: 45px;
+        margin: 0;
     }
 
     /* Link color uses PaperMod's primary theme color */
     .hub-link {
-        margin-top: auto;
         font-weight: 600;
         font-size: 0.9rem;
-        color: var(--theme) !important;
+        color: var(--primary) !important;
+        /* Changed from var(--theme) to visible color */
         text-decoration: none;
+        display: inline-block;
     }
 
     .hub-link:hover {

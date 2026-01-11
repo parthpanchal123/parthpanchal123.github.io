@@ -482,3 +482,14 @@ body {
     /* Removed extra margin on mobile since gap handles it */
   }
 }
+
+/* Fix for Homepage Spacing */
+.first-entry {
+  min-height: unset !important;
+  margin-bottom: 20px !important;
+}
+
+/* Fix social icons alignment */
+.social-icons a:first-of-type {
+  padding-left: 0;
+}
