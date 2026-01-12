@@ -10,6 +10,9 @@ buildExpired: false
 minify:
   disableXML: true
   minifyOutput: true
+  tdeweb:
+    minifyCSS: true
+    minifyJS: true
 
 outputs:
   home:
