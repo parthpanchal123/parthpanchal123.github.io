@@ -26,14 +26,14 @@ taxonomies:
 
 services:
   googleAnalytics:
-    id: "G-0ZX5VN6NME"
+    id: "G-LR4GLM96VJ"
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: Parth's Blog
   description: "Processing the world through 0s and 1s, wide-aperture lenses, and graphite strokes. 🧬 Parth Panchal: Documenting life via clean code, street photography, and creative art."
   keywords: [Blog, Portfolio, PaperMod, ]
-  googleSiteVerification: "G-0ZX5VN6NME"
+  googleSiteVerification: "G-LR4GLM96VJ"
   author: "Parth Panchal"
   images: ["images/profile.png"]
   DateFormat: "January 2, 2006"
@@ -98,7 +98,7 @@ params:
 
   analytics:
     google:
-      SiteVerificationTag: "G-0ZX5VN6NME"
+      SiteVerificationTag: "G-LR4GLM96VJ"
 
   cover:
     hidden: false
