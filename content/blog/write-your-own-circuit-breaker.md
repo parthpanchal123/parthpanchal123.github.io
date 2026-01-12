@@ -16,8 +16,6 @@ tags:
   ]
 ---
 
-# Building a Circuit Breaker: Because Services Fail (And That's Okay!)
-
 Hey there! 👋
 
 So you've probably heard about Circuit Breakers in software engineering, and if you're like me, you might have thought: "Wait, like the ones in my house that trip when I use the microwave and hairdryer at the same time?"
@@ -238,9 +236,9 @@ So next time you're building a service that calls other services, remember: Circ
 
 Happy coding! 🚀
 
-### Github Repository
+## Source Code
 
-[https://github.com/parthpanchal123/My-Circuit-Breaker](https://github.com/parthpanchal123/My-Circuit-Breaker)
+[Github Repository](https://github.com/parthpanchal123/My-Circuit-Breaker)
 
 ---
 

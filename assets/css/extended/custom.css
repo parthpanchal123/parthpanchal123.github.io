@@ -493,3 +493,30 @@ body {
 .social-icons a:first-of-type {
   padding-left: 0;
 }
+
+/* Navigation Icons Styling */
+#menu span {
+  display: flex;
+  align-items: center;
+}
+
+#menu svg {
+  margin-right: 8px;
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  flex-shrink: 0;
+  /* Prevents icon from shrinking */
+  transition: transform 0.3s ease, margin 0.3s ease;
+}
+
+#menu a:hover svg {
+  transform: scale(1.1) rotate(-5deg);
+  /* Subtle playful interaction */
+  margin-right: 10px;
+}
+
+/* Ensure active state color consistency */
+#menu .active svg {
+  color: var(--primary);
+}

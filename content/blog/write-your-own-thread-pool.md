@@ -16,7 +16,7 @@ tags:
   ]
 ---
 
-## _Ever wondered how Java's_ `ExecutorService` works under the hood? Let's build our own thread pool and discover why it's like running a well-organized chai tapri instead of hiring a new chaiwala for every single order.
+Ever wondered how Java's `ExecutorService` works under the hood? Let's build our own thread pool and discover why it's like running a well-organized chai tapri instead of hiring a new chaiwala for every single order.
 
 ## The Problem: When Threads Go Bonkers 🎭
 
@@ -191,7 +191,9 @@ In production, you'd use Java's `ExecutorService` (which is battle-tested and op
 
 Thread pools are everywhere in modern software - web servers, database connection pools, task schedulers. Understanding them isn't just academic; it's practical knowledge that helps you write better concurrent code.
 
-Want to see the full implementation? Check out the [GitHub repository](https://github.com/parthpanchal123/Worker-Pool) and experiment with it yourself!
+## Source Code
+
+[GitHub repository](https://github.com/parthpanchal123/Worker-Pool)
 
 ---
 
