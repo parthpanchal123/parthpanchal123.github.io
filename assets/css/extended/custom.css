@@ -116,6 +116,7 @@ body {
   font-size: 2.2rem;
   margin-bottom: 1rem;
   background: linear-gradient(120deg, var(--primary), var(--secondary));
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
@@ -494,6 +495,19 @@ body {
   padding-left: 0;
 }
 
+/* Accessibility utility */
+.screen-reader-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* Navigation Icons Styling */
 #menu span {
   display: flex;
@@ -517,6 +531,91 @@ body {
 }
 
 /* Ensure active state color consistency */
-#menu .active svg {
+/* Hub Container Styles moved from index.html */
+.hub-container {
+  max-width: var(--main-width);
+  margin: 40px auto 0;
+}
+
+.hub-title {
+  margin: 0 0 24px 0;
   color: var(--primary);
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.hub-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+}
+
+@media screen and (max-width: 900px) {
+  .hub-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hub-card {
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hub-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.hub-icon-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.hub-icon {
+  font-size: 1.2rem;
+  background: var(--code-bg);
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+}
+
+.hub-section-label {
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--secondary);
+}
+
+.hub-card h3 {
+  margin: 0 0 8px 0;
+  color: var(--primary);
+  font-size: 1.5rem;
+}
+
+.hub-text {
+  color: var(--secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  min-height: 45px;
+}
+
+.hub-link {
+  margin-top: auto;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--theme) !important;
+  text-decoration: none;
+}
+
+.hub-link:hover {
+  text-decoration: underline;
 }

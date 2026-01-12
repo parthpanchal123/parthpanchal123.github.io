@@ -2,78 +2,78 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on Parth&#39;s Blog</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>http://localhost:59037/tags/</link>
     <description>Recent content in Tags on Parth&#39;s Blog</description>
     <image>
       <title>Parth&#39;s Blog</title>
-      <url>http://localhost:1313/images/profile.png</url>
-      <link>http://localhost:1313/images/profile.png</link>
+      <url>http://localhost:59037/images/profile.png</url>
+      <link>http://localhost:59037/images/profile.png</link>
     </image>
     <generator>Hugo -- 0.154.3</generator>
     <language>en</language>
     <lastBuildDate>Fri, 09 Jan 2026 22:51:59 +0530</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:59037/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Backend</title>
-      <link>http://localhost:1313/tags/backend/</link>
+      <link>http://localhost:59037/tags/backend/</link>
       <pubDate>Fri, 09 Jan 2026 22:51:59 +0530</pubDate>
-      <guid>http://localhost:1313/tags/backend/</guid>
+      <guid>http://localhost:59037/tags/backend/</guid>
       <description></description>
     </item>
     <item>
       <title>Circuit-Breaker</title>
-      <link>http://localhost:1313/tags/circuit-breaker/</link>
+      <link>http://localhost:59037/tags/circuit-breaker/</link>
       <pubDate>Fri, 09 Jan 2026 22:51:59 +0530</pubDate>
-      <guid>http://localhost:1313/tags/circuit-breaker/</guid>
+      <guid>http://localhost:59037/tags/circuit-breaker/</guid>
       <description></description>
     </item>
     <item>
       <title>Concurrency</title>
-      <link>http://localhost:1313/tags/concurrency/</link>
+      <link>http://localhost:59037/tags/concurrency/</link>
       <pubDate>Fri, 09 Jan 2026 22:51:59 +0530</pubDate>
-      <guid>http://localhost:1313/tags/concurrency/</guid>
+      <guid>http://localhost:59037/tags/concurrency/</guid>
       <description></description>
     </item>
     <item>
       <title>Design-Patterns</title>
-      <link>http://localhost:1313/tags/design-patterns/</link>
+      <link>http://localhost:59037/tags/design-patterns/</link>
       <pubDate>Fri, 09 Jan 2026 22:51:59 +0530</pubDate>
-      <guid>http://localhost:1313/tags/design-patterns/</guid>
+      <guid>http://localhost:59037/tags/design-patterns/</guid>
       <description></description>
     </item>
     <item>
       <title>Java</title>
-      <link>http://localhost:1313/tags/java/</link>
+      <link>http://localhost:59037/tags/java/</link>
       <pubDate>Fri, 09 Jan 2026 22:51:59 +0530</pubDate>
-      <guid>http://localhost:1313/tags/java/</guid>
+      <guid>http://localhost:59037/tags/java/</guid>
       <description></description>
     </item>
     <item>
       <title>Microservices</title>
-      <link>http://localhost:1313/tags/microservices/</link>
+      <link>http://localhost:59037/tags/microservices/</link>
       <pubDate>Fri, 09 Jan 2026 22:51:59 +0530</pubDate>
-      <guid>http://localhost:1313/tags/microservices/</guid>
+      <guid>http://localhost:59037/tags/microservices/</guid>
       <description></description>
     </item>
     <item>
       <title>Multithreading</title>
-      <link>http://localhost:1313/tags/multithreading/</link>
+      <link>http://localhost:59037/tags/multithreading/</link>
       <pubDate>Fri, 09 Jan 2026 22:51:59 +0530</pubDate>
-      <guid>http://localhost:1313/tags/multithreading/</guid>
+      <guid>http://localhost:59037/tags/multithreading/</guid>
       <description></description>
     </item>
     <item>
       <title>Thread-Pool</title>
-      <link>http://localhost:1313/tags/thread-pool/</link>
+      <link>http://localhost:59037/tags/thread-pool/</link>
       <pubDate>Fri, 09 Jan 2026 22:51:59 +0530</pubDate>
-      <guid>http://localhost:1313/tags/thread-pool/</guid>
+      <guid>http://localhost:59037/tags/thread-pool/</guid>
       <description></description>
     </item>
     <item>
       <title>Thread-Safety</title>
-      <link>http://localhost:1313/tags/thread-safety/</link>
+      <link>http://localhost:59037/tags/thread-safety/</link>
       <pubDate>Fri, 09 Jan 2026 22:51:59 +0530</pubDate>
-      <guid>http://localhost:1313/tags/thread-safety/</guid>
+      <guid>http://localhost:59037/tags/thread-safety/</guid>
       <description></description>
     </item>
   </channel>

@@ -1,25 +1,9 @@
 {{- define "main" }}
 
-<style>
-    /* Force Space Grotesk into PaperMod's internal variables */
-    :root {
-        --main-font: 'Space Grotesk', sans-serif;
-        --typography: 'Space Grotesk', sans-serif !important;
-    }
-
-    /* Target every possible text element in the Hub */
-    .hub-container,
-    .hub-container *,
-    .hub-title,
-    .hub-card h3,
-    .hub-text,
-    .hub-section-label,
-    .hub-link {
-        font-family: 'Space Grotesk', sans-serif !important;
-    }
-</style>
-
 {{- partial "home_info.html" . -}}
+
+<!-- Visually hidden but accessible H1 for SEO and Screen Readers -->
+<h1 class="screen-reader-only">{{ .Site.Title }}</h1>
 
 <div class="hub-container">
     <h2 class="hub-title">Explore</h2>
@@ -65,98 +49,5 @@
 
     </div>
 </div>
-
-<style>
-    .hub-container {
-        max-width: var(--main-width);
-        margin: 40px auto 0;
-    }
-
-    .hub-title {
-        margin: 0 0 24px 0;
-        color: var(--primary);
-        font-size: 1.8rem;
-        font-weight: 700;
-    }
-
-    .hub-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: var(--gap);
-    }
-
-    @media screen and (max-width: 900px) {
-        .hub-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    /* Uses PaperMod's native entry background and border */
-    .hub-card {
-        background: var(--entry);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 24px;
-        display: flex;
-        flex-direction: column;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .hub-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .hub-icon-wrapper {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 16px;
-    }
-
-    /* Small tile for icon using PaperMod's code block background style */
-    .hub-icon {
-        font-size: 1.2rem;
-        background: var(--code-bg);
-        padding: 8px;
-        border-radius: 8px;
-        display: flex;
-    }
-
-    .hub-section-label {
-        font-size: 0.75rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        color: var(--secondary);
-    }
-
-    .hub-card h3 {
-        margin: 0 0 8px 0;
-        color: var(--primary);
-        font-size: 1.5rem;
-    }
-
-    .hub-text {
-        color: var(--secondary);
-        font-size: 0.95rem;
-        line-height: 1.5;
-        margin-bottom: 20px;
-        min-height: 45px;
-    }
-
-    /* Link color uses PaperMod's primary theme color */
-    .hub-link {
-        margin-top: auto;
-        font-weight: 600;
-        font-size: 0.9rem;
-        color: var(--theme) !important;
-        text-decoration: none;
-    }
-
-    .hub-link:hover {
-        text-decoration: underline;
-    }
-</style>
 
 {{- end }}
