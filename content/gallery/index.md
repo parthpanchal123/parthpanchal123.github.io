@@ -9,6 +9,7 @@ bodyClass: "gallery-page"
 summary: "A portfolio of my photography and captured moments."
 description: "Some of my favorite moments captured through my lens."
 comments: true
+cover: "/images/gallery-cover.jpg"
 ---
 
 {{< gallery >}}

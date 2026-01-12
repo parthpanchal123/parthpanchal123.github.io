@@ -8,6 +8,7 @@ showBreadCrumbs: false
 bodyClass: "gallery-page"
 summary: "A collection of my hand-drawn sketches and creative artwork."
 description: "My hand-drawn sketches and digital artwork."
+cover: "/images/sketch-cover.jpg"
 comments: true
 ---
 
