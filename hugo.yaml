@@ -13,7 +13,7 @@ enableEmoji: true
 minify:
   disableXML: false    # Changed to false so your sitemap is minified too
   minifyOutput: true
-  tdeweb:
+  tdewolff:
     minifyCSS: true
     minifyJS: true
 
