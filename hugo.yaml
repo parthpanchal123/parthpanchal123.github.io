@@ -27,11 +27,6 @@ taxonomies:
   tag: tags
   category: categories
 
-# --- Analytics ---
-services:
-  googleAnalytics:
-    id: "G-LR4GLM96VJ"
-
 privacy:
   googleAnalytics:
     anonymizeIP: true
