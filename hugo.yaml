@@ -28,6 +28,14 @@ services:
   googleAnalytics:
     id: "G-LR4GLM96VJ"
 
+googleAnalytics: "G-LR4GLM96VJ"
+
+privacy:
+  googleAnalytics:
+    anonymizeIP: true
+    disableTracking: false
+    usePrivacyProxy: false
+
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: Parth's Blog
