@@ -33,6 +33,10 @@ privacy:
     disableTracking: false
     usePrivacyProxy: false
 
+services:
+  googleAnalytics:
+    id: "G-0ZX5VN6NME"
+
 # --- PaperMod Parameters ---
 params:
   env: production 
