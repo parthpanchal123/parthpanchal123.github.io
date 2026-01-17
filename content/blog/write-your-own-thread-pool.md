@@ -14,6 +14,7 @@ tags:
     "concurrency",
     "multithreading",
   ]
+comments: true
 ---
 
 Ever wondered how Java's `ExecutorService` works under the hood? Let's build our own thread pool and discover why it's like running a well-organized chai tapri instead of hiring a new chaiwala for every single order.

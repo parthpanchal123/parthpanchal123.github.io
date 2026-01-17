@@ -14,6 +14,7 @@ tags:
     "thread-safety",
     "circuit-breaker",
   ]
+comments: true
 ---
 
 Hey there! 👋

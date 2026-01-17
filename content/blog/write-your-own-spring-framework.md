@@ -13,6 +13,7 @@ tags:
     "inversion-of-control",
     "dependency-injection",
   ]
+comments: true 
 ---
 
 Ever felt like the Spring Framework is just pure magic? You put an `@Autowired` annotation, and _tadaa_ the object appears 🤌.
