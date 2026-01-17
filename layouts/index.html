@@ -15,7 +15,7 @@
                 <span class="hub-section-label">Tech</span>
             </div>
             <div class="hub-content">
-                <h3>Blog</h3>
+                <h3>Latest Blog</h3>
                 {{ range first 1 (where site.RegularPages "Section" "blog") }}
                 <p class="hub-text">{{ .Title }}</p>
                 {{ end }}
