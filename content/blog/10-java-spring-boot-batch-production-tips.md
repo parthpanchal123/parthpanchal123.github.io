@@ -211,15 +211,15 @@ public class DryRunInterceptor implements HandlerInterceptor {
 
 ### 10. Multi-Property Env Variables 🌐
 **Domain:** 🟪 Configuration  
-**Required:** Spring Boot 3.5 (Upcoming)
+**Required:** Spring Boot 4.0+
 
-Usually, you set one environment variable per property. Spring Boot 3.5 allows binding a single JSON-like or structured variable to multiple properties.
+
+Usually, you set one environment variable per property. Spring Boot 4.0+ allows binding a single JSON-like or structured variable to multiple properties.
 
 **Why use it?**
 Cleaner cloud provider configs (e.g., Kubernetes Secrets) where you have limits on the number of variables.
 
 **How to use:**
-*Note: This is an upcoming feature.*
 
 ```bash
 # Old way:

@@ -619,3 +619,20 @@ body {
 .hub-link:hover {
   text-decoration: underline;
 }
+
+/* Fix for large cover images on list pages */
+.post-entry .entry-cover {
+  margin-bottom: var(--gap);
+  overflow: hidden;
+  max-height: 250px;
+  /* Limit height */
+  border-radius: var(--radius);
+}
+
+.post-entry .entry-cover img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  /* Ensure image covers the area without distortion */
+  object-position: center;
+}
