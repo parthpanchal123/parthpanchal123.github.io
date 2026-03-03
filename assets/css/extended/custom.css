@@ -61,6 +61,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .main {
@@ -534,6 +535,9 @@ h6 {
 
   .main {
     padding-top: 0;
+    /* Let the main content span full viewport width on mobile */
+    max-width: 100%;
+    padding-inline: 16px;
   }
 
   .about-container {
@@ -563,6 +567,7 @@ h6 {
 html {
   scrollbar-width: thin;
   scrollbar-color: rgba(128, 128, 128, 0.25) transparent;
+  overflow-x: hidden;
 }
 
 /* Fix for Homepage Spacing */
@@ -622,8 +627,12 @@ body.list .main:has(.home-info) {
 /* Ensure active state color consistency */
 /* Hub Container Styles moved from index.html */
 .hub-container {
-  max-width: var(--main-width);
+  /* Align with main layout container */
+  max-width: calc(var(--main-width) + var(--gap) * 2);
   margin: 16px auto 0;
+  padding: 0 var(--gap);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .hub-title {
@@ -638,21 +647,29 @@ body.list .main:has(.home-info) {
   grid-template-columns: repeat(3, 1fr);
   gap: var(--gap);
   position: relative;
+  padding: 20px;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hub-grid>* {
+  min-width: 0;
 }
 
 /* Decorative gradient blobs behind the cards */
 .hub-grid::before {
   content: "";
   position: absolute;
-  inset: -20px;
+  inset: 0;
   z-index: -1;
   border-radius: 24px;
   background:
-    radial-gradient(circle at 15% 50%, rgba(176, 106, 179, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 85% 30%, rgba(69, 104, 220, 0.25) 0%, transparent 50%),
-    radial-gradient(circle at 50% 80%, rgba(252, 234, 187, 0.2) 0%, transparent 50%);
-  filter: blur(40px);
-  animation: blob-drift 8s ease-in-out infinite alternate;
+    radial-gradient(circle at 15% 50%, rgba(176, 106, 179, 0.3) 0%, transparent 55%),
+    radial-gradient(circle at 85% 30%, rgba(69, 104, 220, 0.25) 0%, transparent 55%),
+    radial-gradient(circle at 50% 80%, rgba(252, 234, 187, 0.2) 0%, transparent 55%);
+  filter: blur(36px);
+  pointer-events: none;
 }
 
 [data-theme="light"] .hub-grid::before {
@@ -682,6 +699,7 @@ body.list .main:has(.home-info) {
   padding: 20px;
   display: flex;
   flex-direction: column;
+  min-width: 0;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
   /* Glassmorphism */
   backdrop-filter: blur(16px);
@@ -690,6 +708,13 @@ body.list .main:has(.home-info) {
   text-decoration: none;
   color: inherit;
   cursor: pointer;
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 901px) {
+  .hub-card {
+    padding: 16px;
+  }
 }
 
 [data-theme="light"] .hub-card {
@@ -737,6 +762,7 @@ body.list .main:has(.home-info) {
   margin: 0 0 8px 0;
   color: var(--primary);
   font-size: var(--fs-h3) !important;
+  overflow-wrap: anywhere;
 }
 
 .hub-text {
@@ -745,6 +771,14 @@ body.list .main:has(.home-info) {
   line-height: 1.5;
   margin-bottom: 20px;
   min-height: 45px;
+  overflow-wrap: anywhere;
+}
+
+@media screen and (min-width: 901px) {
+  .hub-text {
+    margin-bottom: 14px;
+    min-height: 36px;
+  }
 }
 
 .hub-link {
@@ -780,10 +814,11 @@ body.list .main:has(.home-info) {
    SHOWCASE MARQUEE — Auto-scrolling image strips
    ============================================ */
 .showcase-section {
-  max-width: calc(var(--nav-width) + var(--gap) * 2);
+  max-width: calc(var(--main-width) + var(--gap) * 2);
   margin: 0 auto;
   padding: 0 var(--gap);
   margin-top: clamp(0.75rem, 0.5rem + 0.8vw, 1.5rem);
+  box-sizing: border-box;
 }
 
 .showcase-header {
@@ -794,7 +829,7 @@ body.list .main:has(.home-info) {
 }
 
 .showcase-title {
-  font-size: var(--fs-h3) !important;
+  font-size: var(--fs-h2) !important;
   font-weight: 700;
   color: var(--primary);
   margin: 0;
@@ -817,6 +852,7 @@ body.list .main:has(.home-info) {
 .showcase-marquee {
   position: relative;
   overflow: hidden;
+  width: 100%;
   border-radius: 12px;
   /* Gradient masks on the edges for a polished fade */
   -webkit-mask-image: linear-gradient(to right,
@@ -866,10 +902,26 @@ body.list .main:has(.home-info) {
 
 .showcase-item img {
   height: 100%;
-  width: auto;
+  width: 100%;
   object-fit: cover;
   display: block;
   border-radius: 10px;
+}
+
+/* Mobile-specific tweaks to keep homepage fully responsive */
+@media (max-width: 768px) {
+  /* Homepage hub layout: simple, single-column, no extra horizontal padding */
+  .hub-container {
+    max-width: 100%;
+    margin: 16px 0 0;
+    padding: 0;
+  }
+
+  .hub-grid {
+    grid-template-columns: 1fr;
+    padding: 0;
+    margin: 0;
+  }
 }
 
 /* Scroll animation keyframes */
@@ -896,6 +948,10 @@ body.list .main:has(.home-info) {
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .showcase-section {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
     margin-top: 2rem;
   }
 
@@ -919,6 +975,7 @@ body.list .main:has(.home-info) {
 
   .showcase-header {
     flex-direction: column;
+    align-items: flex-start;
     gap: 4px;
   }
 }
