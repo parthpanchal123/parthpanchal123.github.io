@@ -2,6 +2,41 @@
 :root {
   --theme: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Helvetica, Arial, sans-serif !important;
+
+  /* ============================================
+     FLUID TYPOGRAPHY SCALE
+     Smoothly scales between 320px → 2560px viewports.
+     Sized for comfortable reading on 27" QHD monitors.
+     Uses clamp(min, preferred, max) for each level.
+     ============================================ */
+  --fs-body: clamp(0.938rem, 0.82rem + 0.45vw, 1.25rem);
+  /* 15px → 20px */
+  --fs-sm: clamp(0.813rem, 0.72rem + 0.35vw, 1.063rem);
+  /* 13px → 17px */
+  --fs-xs: clamp(0.75rem, 0.68rem + 0.26vw, 0.938rem);
+  /* 12px → 15px */
+
+  --fs-h1: clamp(1.75rem, 1.2rem + 2.2vw, 3rem);
+  /* 28px → 48px */
+  --fs-h2: clamp(1.5rem, 1.05rem + 1.8vw, 2.375rem);
+  /* 24px → 38px */
+  --fs-h3: clamp(1.25rem, 0.95rem + 1.2vw, 1.875rem);
+  /* 20px → 30px */
+  --fs-h4: clamp(1.063rem, 0.9rem + 0.6vw, 1.375rem);
+  /* 17px → 22px */
+  --fs-h5: clamp(0.938rem, 0.82rem + 0.45vw, 1.188rem);
+  /* 15px → 19px */
+  --fs-h6: clamp(0.813rem, 0.72rem + 0.35vw, 1.063rem);
+  /* 13px → 17px */
+
+  --fs-nav: clamp(0.875rem, 0.78rem + 0.38vw, 1.188rem);
+  /* 14px → 19px */
+  --fs-logo: clamp(1.25rem, 1.05rem + 0.8vw, 1.75rem);
+  /* 20px → 28px */
+  --fs-hero-title: clamp(1.75rem, 1.15rem + 2.4vw, 3.125rem);
+  /* 28px → 50px */
+  --fs-hero-subtitle: clamp(0.875rem, 0.78rem + 0.38vw, 1.188rem);
+  /* 14px → 19px */
 }
 
 /* Force headings to use the specific font weight and style */
@@ -20,7 +55,102 @@ h6 {
 /* Ensure the main body text also updates */
 body {
   font-family: "Space Grotesk", sans-serif !important;
+  font-size: var(--fs-body);
   -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================
+   GLOBAL HEADING SCALE (fluid)
+   ============================================ */
+h1 {
+  font-size: var(--fs-h1) !important;
+}
+
+h2 {
+  font-size: var(--fs-h2) !important;
+}
+
+h3 {
+  font-size: var(--fs-h3) !important;
+}
+
+h4 {
+  font-size: var(--fs-h4) !important;
+}
+
+h5 {
+  font-size: var(--fs-h5) !important;
+}
+
+h6 {
+  font-size: var(--fs-h6) !important;
+}
+
+/* Post content headings — inherit the fluid scale */
+.post-content h1 {
+  font-size: var(--fs-h1) !important;
+}
+
+.post-content h2 {
+  font-size: var(--fs-h2) !important;
+}
+
+.post-content h3 {
+  font-size: var(--fs-h3) !important;
+}
+
+.post-content h4 {
+  font-size: var(--fs-h4) !important;
+}
+
+.post-content h5 {
+  font-size: var(--fs-h5) !important;
+}
+
+.post-content h6 {
+  font-size: var(--fs-h6) !important;
+}
+
+/* Post title on single pages */
+.post-title {
+  font-size: var(--fs-h1) !important;
+}
+
+/* Page header titles */
+.page-header h1 {
+  font-size: var(--fs-h1) !important;
+}
+
+/* First entry (home-info hero) title */
+.first-entry .entry-header h1 {
+  font-size: var(--fs-hero-title) !important;
+  line-height: 1.25;
+}
+
+/* First entry content text */
+.first-entry .entry-content {
+  font-size: var(--fs-hero-subtitle) !important;
+}
+
+/* Entry header h2 on list pages */
+.entry-header h2 {
+  font-size: var(--fs-h3) !important;
+  line-height: 1.3;
+}
+
+/* Entry content / meta small text */
+.entry-content {
+  font-size: var(--fs-sm) !important;
+}
+
+.entry-footer,
+.post-meta,
+.breadcrumbs {
+  font-size: var(--fs-xs) !important;
+}
+
+.breadcrumbs a {
+  font-size: var(--fs-sm) !important;
 }
 
 /* Fix for the Top Navigation menu */
@@ -45,7 +175,7 @@ body {
 /* Base style for menu links */
 .menu a {
   font-family: "Space Grotesk", sans-serif !important;
-  font-size: 1.1rem;
+  font-size: var(--fs-nav);
   font-weight: 500;
   margin-left: 20px;
   transition: all 0.3s ease;
@@ -81,7 +211,7 @@ body {
 
 .logo a {
   font-family: "Space Grotesk", sans-serif !important;
-  font-size: 1.5rem;
+  font-size: var(--fs-logo);
   font-weight: 700;
   letter-spacing: -0.03em;
 }
@@ -107,13 +237,13 @@ body {
 .about-text {
   flex: 1.5;
   font-family: "Space Grotesk", sans-serif;
-  font-size: 1.15rem;
+  font-size: var(--fs-body);
   line-height: 1.7;
   color: var(--content);
 }
 
 .about-text h3 {
-  font-size: 2.2rem;
+  font-size: var(--fs-h2);
   margin-bottom: 1rem;
   background: linear-gradient(120deg, var(--primary), var(--secondary));
   background-clip: text;
@@ -487,7 +617,15 @@ body {
 /* Fix for Homepage Spacing */
 .first-entry {
   min-height: unset !important;
-  margin-bottom: 20px !important;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+/* Remove forced full-viewport height on homepage so footer isn't pushed off-screen */
+body.list .main:has(.home-info) {
+  min-height: unset;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 /* Fix social icons alignment */
@@ -534,13 +672,13 @@ body {
 /* Hub Container Styles moved from index.html */
 .hub-container {
   max-width: var(--main-width);
-  margin: 40px auto 0;
+  margin: 16px auto 0;
 }
 
 .hub-title {
-  margin: 0 0 24px 0;
+  margin: 0 0 16px 0;
   color: var(--primary);
-  font-size: 1.8rem;
+  font-size: var(--fs-h2);
   font-weight: 700;
 }
 
@@ -560,7 +698,7 @@ body {
   background: var(--entry);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 24px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -575,11 +713,11 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .hub-icon {
-  font-size: 1.2rem;
+  font-size: var(--fs-body);
   background: var(--code-bg);
   padding: 8px;
   border-radius: 8px;
@@ -587,7 +725,7 @@ body {
 }
 
 .hub-section-label {
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -597,12 +735,12 @@ body {
 .hub-card h3 {
   margin: 0 0 8px 0;
   color: var(--primary);
-  font-size: 1.5rem;
+  font-size: var(--fs-h3) !important;
 }
 
 .hub-text {
   color: var(--secondary);
-  font-size: 0.95rem;
+  font-size: var(--fs-sm);
   line-height: 1.5;
   margin-bottom: 20px;
   min-height: 45px;
@@ -611,7 +749,7 @@ body {
 .hub-link {
   margin-top: auto;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
   color: var(--theme) !important;
   text-decoration: none;
 }
@@ -635,4 +773,160 @@ body {
   object-fit: cover;
   /* Ensure image covers the area without distortion */
   object-position: center;
+}
+
+/* ============================================
+   SHOWCASE MARQUEE — Auto-scrolling image strips
+   ============================================ */
+.showcase-section {
+  max-width: calc(var(--nav-width) + var(--gap) * 2);
+  margin: 0 auto;
+  padding: 0 var(--gap);
+  margin-top: clamp(0.75rem, 0.5rem + 0.8vw, 1.5rem);
+}
+
+.showcase-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: clamp(12px, 0.75rem + 0.4vw, 20px);
+}
+
+.showcase-title {
+  font-size: var(--fs-h3) !important;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0;
+}
+
+.showcase-view-all {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.showcase-view-all:hover {
+  color: var(--primary);
+}
+
+/* The overflow container — clips the infinite track */
+.showcase-marquee {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  /* Gradient masks on the edges for a polished fade */
+  -webkit-mask-image: linear-gradient(to right,
+      transparent 0%,
+      black 5%,
+      black 95%,
+      transparent 100%);
+  mask-image: linear-gradient(to right,
+      transparent 0%,
+      black 5%,
+      black 95%,
+      transparent 100%);
+}
+
+/* The scrolling track */
+.showcase-track {
+  display: flex;
+  gap: clamp(8px, 0.5rem + 0.3vw, 16px);
+  width: max-content;
+  animation: marquee-scroll-left 45s linear infinite;
+}
+
+.showcase-track--reverse {
+  animation: marquee-scroll-right 50s linear infinite;
+}
+
+/* Pause on hover — lets users appreciate individual images */
+.showcase-marquee:hover .showcase-track {
+  animation-play-state: paused;
+}
+
+/* Individual image containers */
+.showcase-item {
+  flex-shrink: 0;
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+  height: clamp(100px, 6rem + 2.5vw, 160px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.showcase-item:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+}
+
+.showcase-item img {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+}
+
+/* Scroll animation keyframes */
+@keyframes marquee-scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-scroll-right {
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .showcase-section {
+    margin-top: 2rem;
+  }
+
+  .showcase-item {
+    height: 100px;
+  }
+
+  .showcase-track {
+    animation-duration: 30s;
+  }
+
+  .showcase-track--reverse {
+    animation-duration: 35s;
+  }
+}
+
+@media (max-width: 480px) {
+  .showcase-item {
+    height: 80px;
+  }
+
+  .showcase-header {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion) {
+
+  .showcase-track,
+  .showcase-track--reverse {
+    animation: none;
+  }
 }

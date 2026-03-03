@@ -50,4 +50,72 @@
     </div>
 </div>
 
+<!-- ============================================
+     VISUAL SHOWCASE: Auto-scrolling image strips
+     ============================================ -->
+
+<!-- Photography Strip -->
+{{ with site.GetPage "/gallery" }}
+{{ $images := .Resources.ByType "image" }}
+{{ if gt (len $images) 0 }}
+<div class="showcase-section">
+    <div class="showcase-header">
+        <h2 class="showcase-title">📸 Recent Clicks</h2>
+        <a href="/gallery/" class="showcase-view-all">View All →</a>
+    </div>
+    <div class="showcase-marquee" data-direction="left">
+        <div class="showcase-track">
+            {{ range first 12 $images }}
+            {{ $thumb := .Resize "400x webp q85" }}
+            <a href="/gallery/" class="showcase-item">
+                <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}"
+                    alt="{{ .Name }}" loading="lazy" />
+            </a>
+            {{ end }}
+            <!-- Duplicate for seamless loop -->
+            {{ range first 12 $images }}
+            {{ $thumb := .Resize "400x webp q85" }}
+            <div class="showcase-item" aria-hidden="true">
+                <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" alt=""
+                    loading="lazy" />
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</div>
+{{ end }}
+{{ end }}
+
+<!-- Sketches Strip -->
+{{ with site.GetPage "/sketches" }}
+{{ $images := .Resources.ByType "image" }}
+{{ if gt (len $images) 0 }}
+<div class="showcase-section">
+    <div class="showcase-header">
+        <h2 class="showcase-title">🖋️ Sketches & Art</h2>
+        <a href="/sketches/" class="showcase-view-all">View All →</a>
+    </div>
+    <div class="showcase-marquee" data-direction="right">
+        <div class="showcase-track showcase-track--reverse">
+            {{ range first 10 $images }}
+            {{ $thumb := .Resize "400x webp q85" }}
+            <a href="/sketches/" class="showcase-item">
+                <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}"
+                    alt="{{ .Name }}" loading="lazy" />
+            </a>
+            {{ end }}
+            <!-- Duplicate for seamless loop -->
+            {{ range first 10 $images }}
+            {{ $thumb := .Resize "400x webp q85" }}
+            <div class="showcase-item" aria-hidden="true">
+                <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" alt=""
+                    loading="lazy" />
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</div>
+{{ end }}
+{{ end }}
+
 {{- end }}
