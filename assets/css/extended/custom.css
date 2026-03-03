@@ -637,6 +637,36 @@ body.list .main:has(.home-info) {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--gap);
+  position: relative;
+}
+
+/* Decorative gradient blobs behind the cards */
+.hub-grid::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  z-index: -1;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 15% 50%, rgba(176, 106, 179, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 85% 30%, rgba(69, 104, 220, 0.25) 0%, transparent 50%),
+    radial-gradient(circle at 50% 80%, rgba(252, 234, 187, 0.2) 0%, transparent 50%);
+  filter: blur(40px);
+  animation: blob-drift 8s ease-in-out infinite alternate;
+}
+
+[data-theme="light"] .hub-grid::before {
+  opacity: 0.5;
+}
+
+@keyframes blob-drift {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+
+  100% {
+    transform: scale(1.04) translate(8px, -6px);
+  }
 }
 
 @media screen and (max-width: 900px) {
@@ -646,18 +676,38 @@ body.list .main:has(.home-info) {
 }
 
 .hub-card {
-  background: var(--entry);
-  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  /* Glassmorphism */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  /* Reset link styles — card is now an <a> */
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+[data-theme="light"] .hub-card {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(0, 0, 0, 0.08);
 }
 
 .hub-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+[data-theme="light"] .hub-card:hover {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 .hub-icon-wrapper {
