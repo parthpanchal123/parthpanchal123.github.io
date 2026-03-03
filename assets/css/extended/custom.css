@@ -57,6 +57,14 @@ body {
   font-family: "Space Grotesk", sans-serif !important;
   font-size: var(--fs-body);
   -webkit-font-smoothing: antialiased;
+  /* Sticky footer: body fills viewport, .main grows */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1;
 }
 
 /* ============================================
@@ -166,10 +174,37 @@ h6 {
   /* Optional: makes the # a different color */
 }
 
+/* ============================================
+   GLASSMORPHISM HEADER
+   Frosted glass sticky header — Apple-inspired
+   ============================================ */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: rgba(var(--theme-rgb, 31, 31, 35), 0.72);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(var(--primary-rgb, 255, 255, 255), 0.08);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Dark mode glass — slight warmth */
+[data-theme="dark"] .header {
+  background: rgba(24, 24, 27, 0.72);
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Light mode glass */
+[data-theme="light"] .header {
+  background: rgba(255, 255, 255, 0.72);
+  border-bottom-color: rgba(0, 0, 0, 0.06);
+}
+
 /* Container for the menu */
 .nav {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 /* Base style for menu links */
@@ -179,7 +214,6 @@ h6 {
   font-weight: 500;
   margin-left: 20px;
   transition: all 0.3s ease;
-  /* Smooth transition */
   position: relative;
   text-decoration: none !important;
   opacity: 0.8;
@@ -189,7 +223,6 @@ h6 {
 .menu a:hover {
   opacity: 1;
   transform: translateY(-2px);
-  /* Slight lift up */
   color: var(--primary) !important;
 }
 
@@ -218,33 +251,95 @@ h6 {
 
 .logo a:hover {
   background: none !important;
-  /* Removes the default grey background on hover */
 }
 
-/* Layout container */
-/* Layout container with Animation */
+/* ============================================
+   ABOUT PAGE — Centered Profile Layout
+   Clean stacked layout with animated profile ring
+   ============================================ */
 .about-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 3rem;
-  margin-top: 1rem;
+  text-align: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
   opacity: 0;
   animation: fadeUp 0.8s ease-out forwards;
 }
 
-/* Text styling */
+/* Profile image — no wrapping card, just the image + ring */
+.about-image {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  order: -1;
+}
+
+/* Animated gradient border ring on profile image */
+.about-image::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg,
+      #fceabb,
+      #f8b1d4,
+      #b06ab3,
+      #4568dc,
+      #b06ab3,
+      #f8b1d4,
+      #fceabb);
+  animation: gradient-spin 4s linear infinite;
+  z-index: 0;
+  opacity: 0.75;
+  filter: blur(3px);
+}
+
+@keyframes gradient-spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.about-image img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--theme);
+  position: relative;
+  z-index: 1;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.about-image img:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 35px rgba(176, 106, 179, 0.35);
+}
+
+/* Text section — centered below image */
 .about-text {
-  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
   font-family: "Space Grotesk", sans-serif;
   font-size: var(--fs-body);
   line-height: 1.7;
   color: var(--content);
+  max-width: 520px;
 }
 
 .about-text h3 {
   font-size: var(--fs-h2);
-  margin-bottom: 1rem;
+  margin: 0;
   background: linear-gradient(120deg, var(--primary), var(--secondary));
   background-clip: text;
   -webkit-background-clip: text;
@@ -252,53 +347,42 @@ h6 {
   display: inline-block;
 }
 
+.about-text p {
+  margin: 0;
+  color: var(--secondary);
+  font-size: var(--fs-body);
+}
+
+/* Link items — horizontal row of cards */
 .about-text ul {
   list-style: none;
-  /* Remove default bullets */
   padding: 0;
-  margin-top: 1.5rem;
+  margin: 0.75rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  width: 100%;
 }
 
 .about-text li {
   position: relative;
-  padding-left: 25px;
-  margin-bottom: 12px;
+  padding: 18px 16px;
   font-weight: 500;
+  text-align: center;
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.about-text li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-color: rgba(176, 106, 179, 0.3);
 }
 
 .about-text li::before {
-  content: "→";
-  /* Custom arrow bullet */
-  position: absolute;
-  left: 0;
-  color: var(--primary);
-  font-weight: bold;
-}
-
-/* Image container styling */
-.about-image {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  position: relative;
-}
-
-/* Profile Image Styling */
-.about-image img {
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid var(--tertiary);
-  /* Subtle border matching theme */
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.2);
-  /* Soft shadow */
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.about-image img:hover {
-  transform: scale(1.05) rotate(2deg);
-  box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.3);
+  content: none;
 }
 
 /* Fade Up Animation */
@@ -314,157 +398,77 @@ h6 {
   }
 }
 
-/* Responsive: Stack gracefully on smaller screens */
-@media (max-width: 850px) {
-  .about-container {
-    flex-direction: column-reverse;
-    text-align: center;
-    gap: 2rem;
-  }
-
-  .about-text {
-    width: 100%;
-  }
-
+/* Responsive: Stack cards vertically on mobile */
+@media (max-width: 600px) {
   .about-text ul {
-    display: inline-block;
-    /* Keeps list left-aligned but centered block */
-    text-align: left;
+    grid-template-columns: 1fr;
+  }
+
+  .about-image::before {
+    width: 150px;
+    height: 150px;
   }
 
   .about-image img {
-    width: 180px;
-    height: 180px;
+    width: 130px;
+    height: 130px;
   }
 }
 
-/* The container that creates the columns */
+/* ============================================
+   GALLERY — TRUE MASONRY (CSS columns)
+   Each image retains its natural aspect ratio
+   ============================================ */
 .gallery-grid {
   column-count: 3;
-  /* Number of columns on desktop */
-  column-gap: 15px;
-  /* Space between columns */
+  column-gap: 16px;
   width: 100%;
   margin: 2rem 0;
 }
 
-/* Individual items in the gallery */
 .gallery-link {
   display: inline-block;
-  /* Essential for masonry to prevent breaking across columns */
-  margin-bottom: 15px;
-  /* Space between images vertically */
   width: 100%;
-  border-radius: 12px;
-  overflow: hidden;
-  background: var(--tertiary);
-  /* Loading placeholder color */
-}
-
-.gallery-link img {
-  width: 100%;
-  height: auto;
-  /* Maintains original aspect ratio like Pinterest */
-  display: block;
-  transition: transform 0.4s ease;
-}
-
-.gallery-link:hover img {
-  transform: scale(1.05);
-}
-
-/* Responsive: 2 columns for tablets, 1 column for phones */
-@media (max-width: 900px) {
-  .gallery-grid {
-    column-count: 2;
-  }
-}
-
-@media (max-width: 500px) {
-  .gallery-grid {
-    column-count: 1;
-  }
-}
-
-/* Removes the gray background and padding from all images in the gallery */
-.gallery-grid .gallery-link {
-  background: none !important;
-  padding: 0 !important;
-  border: none !important;
-}
-
-.gallery-grid img {
-  background: none !important;
-  padding: 0 !important;
-  border: none !important;
-  box-shadow: none !important;
-  /* Removes any shadow if present */
-}
-
-/* Optional: Add a subtle rounded corner to keep it modern */
-.gallery-link img {
-  border-radius: 8px;
-}
-
-/* Fix for the unwanted "extended" space under images */
-.gallery-grid img {
-  display: block;
-  /* This is the most important line */
-  vertical-align: bottom;
-  margin: 0;
-  padding: 0;
-  background: none !important;
-}
-
-/* Ensure the link container doesn't add its own height */
-.gallery-link {
-  line-height: 0;
-  display: inline-block;
-  width: 100%;
-}
-
-/* 1. Create the Pinterest Columns */
-.gallery-grid {
-  column-count: 3;
-  /* 3 columns on desktop */
-  column-gap: 15px;
-  width: 100%;
-  margin: 2rem 0;
-}
-
-/* 2. Style the Image Containers */
-.gallery-link {
-  display: inline-block;
-  /* Crucial for masonry */
-  width: 100%;
-  margin-bottom: 15px;
-  /* Gap between images vertically */
+  margin-bottom: 16px;
   border-radius: 12px;
   overflow: hidden;
   line-height: 0;
-  /* Removes the "extended part" below images */
   background: none !important;
-  /* Removes default PaperMod gray background */
   padding: 0 !important;
-  /* Removes default PaperMod padding */
+  border: none !important;
+  break-inside: avoid;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* 3. Style the Images themselves */
-.gallery-grid img {
+.gallery-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-link img {
   width: 100% !important;
   height: auto !important;
-  /* Allows images to keep their natural height */
   display: block;
+  border-radius: 12px;
   margin: 0 !important;
   padding: 0 !important;
   border: none !important;
   box-shadow: none !important;
+  transition: transform 0.4s ease;
 }
 
-/* 4. Responsive adjustments */
+.gallery-link:hover img {
+  transform: scale(1.03);
+}
+
 @media (max-width: 800px) {
   .gallery-grid {
     column-count: 2;
+    column-gap: 12px;
+  }
+
+  .gallery-link {
+    margin-bottom: 12px;
   }
 }
 
@@ -474,105 +478,33 @@ h6 {
   }
 }
 
-/* 1. Make the main container wide ONLY on the gallery page */
+/* Gallery page: wide layout with more columns */
 .gallery-page .main {
   max-width: 95% !important;
-  /* Utilizes almost full screen width */
   margin: 0 auto;
 }
 
-/* 2. Responsive Pinterest Grid */
-.gallery-page .gallery-grid {
-  display: grid;
-  /* Auto-calculates columns: it adds more if there is space! */
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  grid-auto-flow: dense;
-  gap: 16px;
-  padding: 20px 0;
-}
-
-/* 3. Strip PaperMod defaults ONLY inside the gallery */
-.gallery-page .gallery-link {
-  display: block;
-  line-height: 0;
-  border-radius: 12px;
-  overflow: hidden;
-  background: none !important;
-  padding: 0 !important;
-}
-
-.gallery-page .gallery-grid img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-/* 4. The Hover Effect */
-.gallery-page .gallery-link:hover img {
-  transform: scale(1.05);
-}
-
-/* 5. Mobile Adjustments */
-@media (max-width: 600px) {
-  .gallery-page .gallery-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 8px;
-  }
-}
-
-/* 1. Use the full screen width for the gallery page only */
-.gallery-page .main {
-  max-width: 95% !important;
-}
-
-/* 2. The Column Layout (This creates the Pinterest "stagger") */
 .gallery-page .gallery-grid {
   column-count: 4;
-  /* Number of columns on wide screens */
   column-gap: 20px;
-  /* Space between columns */
   width: 100%;
   margin: 2rem 0;
 }
 
-/* 3. The individual image containers */
 .gallery-page .gallery-link {
-  display: inline-block;
-  /* Critical: prevents images from splitting across columns */
-  width: 100%;
   margin-bottom: 20px;
-  /* Space between images vertically */
-  border-radius: 12px;
-  overflow: hidden;
-  line-height: 0;
-  background: none !important;
-  padding: 0 !important;
 }
 
-.gallery-page .gallery-grid img {
-  width: 100% !important;
-  height: auto !important;
-  /* Let images keep their natural varied heights */
-  display: block;
-  transition: transform 0.4s ease;
-  border: none !important;
-}
-
-/* 4. Increase columns for very large screens */
 @media (min-width: 1600px) {
   .gallery-page .gallery-grid {
     column-count: 5;
   }
 }
 
-/* 5. Reduce columns for mobile */
 @media (max-width: 900px) {
   .gallery-page .gallery-grid {
     column-count: 2;
+    column-gap: 12px;
   }
 }
 
@@ -585,33 +517,52 @@ h6 {
 /* Mobile Spacing Fixes */
 @media (max-width: 768px) {
 
-  /* Reduce excessive padding in the navigation menu */
+  /* Compact header on mobile */
   .nav {
     padding-top: 10px;
     padding-bottom: 10px;
   }
 
-  /* Reduce the gap between the menu and the page title/content */
   .post-header {
     margin-top: 0px !important;
     margin-bottom: 10px !important;
   }
 
-  /* Reduce the top margin of the content to pull it closer */
   .post-content {
     margin-top: 0px;
   }
 
-  /* Optional: Adjust main container padding if necessary */
   .main {
     padding-top: 0;
   }
 
-  /* Reduce about container top margin */
   .about-container {
     margin-top: 0;
-    /* Removed extra margin on mobile since gap handles it */
   }
+}
+
+/* Custom scrollbar — thin, rounded, theme-matched */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--primary-rgb, 128, 128, 128), 0.25);
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--primary-rgb, 128, 128, 128), 0.4);
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(128, 128, 128, 0.25) transparent;
 }
 
 /* Fix for Homepage Spacing */
