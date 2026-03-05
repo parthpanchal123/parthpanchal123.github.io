@@ -1,4 +1,38 @@
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K8BF27FC" height="0" width="0"
-        style="display:none;visibility:hidden"></iframe></noscript>
+                style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+
+<!-- Sync body top padding with real header height so the fixed header never overlaps content -->
+<script>
+        (function () {
+                function syncHeaderOffset() {
+                        var header = document.querySelector('.header');
+                        if (!header) return;
+                        var h = header.getBoundingClientRect().height;
+                        if (!h) return;
+                        document.body.style.paddingTop = h + 'px';
+                        document.documentElement.style.setProperty('--header-height', h + 'px');
+                }
+
+                // Run immediately — header is in DOM before this script
+                syncHeaderOffset();
+
+                // Re-run after each paint to catch immediate layout shifts
+                requestAnimationFrame(function () {
+                        syncHeaderOffset();
+                        requestAnimationFrame(syncHeaderOffset);
+                });
+
+                // Re-sync after web fonts finish loading (main cause of clipping)
+                if (document.fonts && document.fonts.ready) {
+                        document.fonts.ready.then(syncHeaderOffset);
+                }
+
+                // Re-sync after all resources load
+                window.addEventListener('load', syncHeaderOffset);
+
+                // Re-sync on resize / orientation change
+                window.addEventListener('resize', syncHeaderOffset);
+        })();
+</script>

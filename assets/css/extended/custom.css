@@ -3,6 +3,11 @@
   --theme: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Helvetica, Arial, sans-serif !important;
 
+  /* Header height — used to push content below the fixed header.
+     JS in extend_footer.html overrides this with the real measured value at runtime.
+     Default is intentionally slightly generous to prevent content overlap before JS fires. */
+  --header-height: 70px;
+
   /* ============================================
      FLUID TYPOGRAPHY SCALE
      Smoothly scales between 320px → 2560px viewports.
@@ -63,7 +68,7 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   /* Push content below the fixed header */
-  padding-top: 60px;
+  padding-top: var(--header-height);
 }
 
 .main {
@@ -193,6 +198,7 @@ h6 {
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
 }
 
 /* Dark mode glass — slight warmth */
@@ -207,11 +213,14 @@ h6 {
   border-bottom-color: rgba(0, 0, 0, 0.06);
 }
 
-/* Container for the menu */
+/* Container for the menu — override theme's line-height: var(--header-height) which made
+   each nav row inherit a massive line-height, causing ~276px mobile header */
 .nav {
-  padding-top: 16px;
-  padding-bottom: 16px;
+  line-height: 1 !important;
+  padding-top: 22px;
+  padding-bottom: 22px;
 }
+
 
 /* Base style for menu links */
 .menu a {
@@ -523,10 +532,42 @@ h6 {
 /* Mobile Spacing Fixes */
 @media (max-width: 768px) {
 
-  /* Compact header on mobile */
+  /* Mobile nav wraps to two rows — use a larger initial fallback */
+  :root {
+    --header-height: 130px;
+  }
+
+  /* Give each row of the header proper height */
   .nav {
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 1 !important;
+  }
+
+  /* Each row (logo row + menu row) gets its own vertical padding */
+  .logo {
+    padding-top: 14px;
+    padding-bottom: 14px;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  #menu {
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 14px;
+    min-height: 40px;
+    align-items: center;
+  }
+
+  /* Larger, more legible logo on mobile */
+  .logo a {
+    font-size: 1.25rem !important;
+  }
+
+  /* Larger nav links on mobile */
+  .menu a {
+    font-size: 0.95rem !important;
+    margin-left: 14px;
   }
 
   .post-header {

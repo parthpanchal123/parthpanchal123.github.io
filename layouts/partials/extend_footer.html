@@ -1,0 +1,33 @@
+<!-- Sync body top padding with real header height so the fixed header never overlaps content -->
+<script>
+    (function () {
+        function syncHeaderOffset() {
+            var header = document.querySelector('.header');
+            if (!header) return;
+            var h = header.getBoundingClientRect().height;
+            if (!h) return;
+            document.body.style.paddingTop = h + 'px';
+            document.documentElement.style.setProperty('--header-height', h + 'px');
+        }
+
+        // Run immediately — header is already in DOM at this point
+        syncHeaderOffset();
+
+        // Re-run after paint to catch layout shifts
+        requestAnimationFrame(function () {
+            syncHeaderOffset();
+            requestAnimationFrame(syncHeaderOffset);
+        });
+
+        // Re-sync after web fonts finish loading (main cause of clipping with Google Fonts)
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(syncHeaderOffset);
+        }
+
+        // Re-sync after all resources load
+        window.addEventListener('load', syncHeaderOffset);
+
+        // Re-sync on resize / orientation change
+        window.addEventListener('resize', syncHeaderOffset);
+    })();
+</script>
