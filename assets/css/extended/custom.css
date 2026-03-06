@@ -616,18 +616,158 @@ html {
   overflow-x: hidden;
 }
 
+/* ============================================
+   HERO SECTION — Premium left-aligned treatment
+   Gradient title, accent bar, ambient glow,
+   fade-up entrance, generous spacing
+   ============================================ */
+
 /* Fix for Homepage Spacing */
 .first-entry {
   min-height: unset !important;
-  margin-top: 10px !important;
-  margin-bottom: 10px !important;
+  margin-top: 0 !important;
+  /* Collapse bottom margin — Explore section pulls up close */
+  margin-bottom: 0 !important;
 }
 
 /* Remove forced full-viewport height on homepage so footer isn't pushed off-screen */
 body.list .main:has(.home-info) {
   min-height: unset;
-  padding-top: 10px;
+  padding-top: 0;
   padding-bottom: 10px;
+}
+
+/* Hero article wrapper — compact, no extra side padding */
+.home-info {
+  position: relative;
+  /* Keep existing theme padding, just tighten top/bottom */
+  padding-top: clamp(1.25rem, 0.75rem + 1.5vw, 2.25rem) !important;
+  padding-bottom: clamp(0.5rem, 0.25rem + 0.75vw, 1rem) !important;
+  /* Fade-up entrance */
+  opacity: 0;
+  transform: translateY(18px);
+  animation: hero-fade-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+  overflow: visible;
+}
+
+/* Ambient glow blob — anchored to top-left of content */
+.home-info::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 500px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 0% 30%,
+      rgba(176, 106, 179, 0.1) 0%,
+      rgba(69, 104, 220, 0.07) 45%,
+      transparent 70%);
+  filter: blur(48px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Gradient text on the hero H1 + accent underline via ::after */
+.home-info .entry-header {
+  position: relative;
+  display: inline-block;
+}
+
+/* h1: no gradient itself — .hero-text children carry the gradient */
+.home-info .entry-header h1 {
+  animation: hero-fade-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+  opacity: 0;
+  margin-bottom: 0;
+}
+
+/* Only the text spans get the gradient clip — static, no animation */
+.home-info .entry-header h1 .hero-text {
+  /* Dark mode: white → lavender → electric blue */
+  background: linear-gradient(105deg,
+      #ffffff 0%,
+      #d4aaff 40%,
+      #4568dc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Light mode: softer mid-range purples and blues — readable but not aggressive */
+[data-theme="light"] .home-info .entry-header h1 .hero-text {
+  background: linear-gradient(105deg,
+      #6c3fc7 0%,
+      #8b60d8 45%,
+      #4a72cc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Emoji: sits outside the gradient — renders with its natural color */
+.home-info .entry-header h1 .hero-emoji {
+  display: inline-block;
+  -webkit-text-fill-color: unset !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  background: none !important;
+}
+
+/* Glowing accent line directly under the title */
+.home-info .entry-header::after {
+  content: "";
+  display: block;
+  height: 3px;
+  width: clamp(80px, 30%, 180px);
+  margin-top: 10px;
+  background: linear-gradient(90deg,
+      rgba(176, 106, 179, 0.9) 0%,
+      rgba(69, 104, 220, 0.7) 70%,
+      transparent 100%);
+  border-radius: 999px;
+  box-shadow: 0 0 12px rgba(176, 106, 179, 0.5);
+  opacity: 0;
+  animation: hero-fade-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.35s forwards;
+}
+
+/* Subtitle text — slightly more prominent */
+.home-info .entry-content {
+  margin-top: 0.75rem;
+  opacity: 0;
+  animation: hero-fade-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.28s forwards;
+}
+
+/* Social icons row — staggered delay */
+.home-info .entry-footer {
+  margin-top: clamp(0.75rem, 0.5rem + 0.6vw, 1.25rem);
+  opacity: 0;
+  animation: hero-fade-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.42s forwards;
+}
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradient-shimmer {
+  0% {
+    background-position: 0% center;
+  }
+
+  50% {
+    background-position: 100% center;
+  }
+
+  100% {
+    background-position: 0% center;
+  }
 }
 
 /* Fix social icons alignment */
@@ -675,7 +815,8 @@ body.list .main:has(.home-info) {
 .hub-container {
   /* Align with main layout container */
   max-width: calc(var(--main-width) + var(--gap) * 2);
-  margin: 16px auto 0;
+  /* Pull Explore up closer to the hero */
+  margin: 0 auto 0;
   padding: 0 var(--gap);
   width: 100%;
   box-sizing: border-box;
@@ -952,6 +1093,8 @@ body.list .main:has(.home-info) {
   object-fit: cover;
   display: block;
   border-radius: 10px;
+  /* Reserve intrinsic space from width/height attrs before image paints */
+  aspect-ratio: auto;
 }
 
 /* Mobile-specific tweaks to keep homepage fully responsive */

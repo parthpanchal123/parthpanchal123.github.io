@@ -73,7 +73,7 @@ params:
 
   # Home-Info Mode (Active)
   homeInfoParams:
-    Title: "Hi there 👋, I'm Parth"
+    Title: '<span class="hero-text">Hi there </span><span class="hero-emoji">👋</span><span class="hero-text">, I''m Parth</span>'
     Content: |
       #### An Engineer during the week, artist by the weekend.
       Welcome to my personal archive of **_tech_**, **_art_**, and **_photography_**.
@@ -144,5 +144,8 @@ menu:
 # --- Highlighting ---
 pygmentsUseClasses: true
 markup:
+  goldmark:
+    renderer:
+      unsafe: true
   highlight:
     noClasses: false
