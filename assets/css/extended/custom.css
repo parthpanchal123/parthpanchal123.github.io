@@ -1071,13 +1071,17 @@ body.list .main:has(.home-info) {
   animation-play-state: paused;
 }
 
-/* Individual image containers */
+/* Individual image containers — explicit calculated width ensures older
+   browsers (and Safari) don't collapse the flex max-content track before
+   images load. 1.5 multiplier matches the ~3:2 gallery thumbnail ratio. */
 .showcase-item {
   flex-shrink: 0;
   display: block;
   border-radius: 10px;
   overflow: hidden;
   height: clamp(100px, 6rem + 2.5vw, 160px);
+  width: calc(clamp(100px, 6rem + 2.5vw, 160px) * 1.5);
+  will-change: transform;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -1093,8 +1097,6 @@ body.list .main:has(.home-info) {
   object-fit: cover;
   display: block;
   border-radius: 10px;
-  /* Reserve intrinsic space from width/height attrs before image paints */
-  aspect-ratio: auto;
 }
 
 /* Mobile-specific tweaks to keep homepage fully responsive */

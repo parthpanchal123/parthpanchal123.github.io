@@ -37,28 +37,4 @@
         })();
 </script>
 
-<!-- Marquee animation recovery — resets animation after images load
-     Fixes mobile "blank strip" when images load after animation starts -->
-<script>
-        (function () {
-                function fixMarquees() {
-                        document.querySelectorAll('.showcase-track').forEach(function (track) {
-                                track.style.animation = 'none';
-                                track.offsetWidth; /* force reflow so the reset takes effect */
-                                track.style.animation = '';
-                        });
-                }
-                /* Recover once all resources are ready */
-                if (document.readyState === 'complete') {
-                        fixMarquees();
-                } else {
-                        window.addEventListener('load', fixMarquees);
-                }
-                /* Also recover if any individual marquee image loads late */
-                document.querySelectorAll('.showcase-marquee img').forEach(function (img) {
-                        if (!img.complete) {
-                                img.addEventListener('load', fixMarquees, { once: true });
-                        }
-                });
-        }());
-</script>
+<!-- Cleaned up JS — relying natively on CSS for initial layout engine evaluation -->
