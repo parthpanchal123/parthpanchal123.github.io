@@ -1,5 +1,5 @@
 ---
-title: "From 'Definitely Not' to 'Maybe': Building a Bloom Filter in Java"
+title: "From ‘Definitely Not’ to ‘Maybe’: Building a Bloom Filter in Java"
 date: 2026-03-28
 tags: ["Java", "Data Structures", "Algorithms", "System Design"]
 categories: ["Engineering"]
@@ -41,13 +41,13 @@ To understand why this structure exists, think about the analogy first — then 
 
 Imagine you're managing a massive **Kirana store godown** (warehouse) during the peak Diwali rush. You have thousands of items stacked in piles, and digging through them to check if you stock a specific brand is a total nightmare.
 
-So you use a **"Jugaad" shortcut**: a small index card at the front counter. Every time you stock a new item, you don't write its name. Instead, you follow a code and put **three specific colored stamps** on the card. For "Amul Ghee," the code might be **Red**, **Green**, and **Blue**.
+So you use a **“Jugaad” shortcut**: a small index card at the front counter. Every time you stock a new item, you don't write its name. Instead, you follow a code and put **three specific colored stamps** on the card. For “Amul Ghee,” the code might be **Red**, **Green**, and **Blue**.
 
 This gives you two possible outcomes when a customer asks for something:
 
-1. **The "Pakka No" (Definite No):** A customer asks for a rare brand of tea. You check the card — the **Red** stamp is missing. You know for a fact it's not there, without even walking to the back. *"Nahi hai, zepto karlo."* You just saved 10 minutes of pointless searching.
+1. **The “Pakka No” (Definite No):** A customer asks for a rare brand of tea. You check the card — the **Red** stamp is missing. You know for a fact it's not there, without even walking to the back. *“Nahi hai, zepto karlo.”* You just saved 10 minutes of pointless searching.
 
-2. **The "Shaayad" (Maybe):** Another customer asks for "Saffola Oil." All three stamps are present. It *might* be in the back. But you still have to go check — because the Red, Green, and Blue stamps might have been left behind by three *different* items you stocked earlier (say, Parle-G set Red, Papad set Green, and Dettol set Blue). That's a false positive — the card lied.
+2. **The “Shaayad” (Maybe):** Another customer asks for “Saffola Oil.” All three stamps are present. It *might* be in the back. But you still have to go check — because the Red, Green, and Blue stamps might have been left behind by three *different* items you stocked earlier (say, Parle-G set Red, Papad set Green, and Dettol set Blue). That's a false positive — the card lied.
 
 A Bloom Filter is exactly this card, implemented as a **bit array with multiple hash functions**.
 
@@ -57,18 +57,18 @@ A Bloom Filter is exactly this card, implemented as a **bit array with multiple 
 
 The structure is a bit array of size $m$, initialized to all zeros. Adding an item means running it through $k$ hash functions, each producing an index, then flipping those $k$ bits to **1**. Checking membership means running through the same $k$ functions and verifying all those bits are still **1**.
 
-### The asymmetry that matters
+### The Asymmetry That Matters
 
 - **ABSENT = CERTAIN:** If even one of the $k$ bits is `0`, the item was never added. It is *physically impossible* for it to be present, because adding it would have set that bit.
 - **PRESENT = MAYBE:** All $k$ bits are `1`, but those bits might have been flipped by a combination of *other* items. That's a false positive.
 
-The diagram below shows both scenarios. Panel A shows a true add: "Amul Ghee" sets bits 2, 6, and 11 via three hash functions. Panel B shows the false positive trap: three different items each happen to set one of those same bits. A query for "Saffola Oil" checks positions 2, 6, and 11 — finds all three at `1` — and incorrectly returns "maybe present."
+The diagram below shows both scenarios. Panel A shows a true add: “Amul Ghee” sets bits 2, 6, and 11 via three hash functions. Panel B shows the false positive trap: three different items each happen to set one of those same bits. A query for “Saffola Oil” checks positions 2, 6, and 11 — finds all three at `1` — and incorrectly returns “maybe present.”
 
-![Bloom Filter false positive diagram — Panel A shows bits set by adding "Amul Ghee"; Panel B shows the same three bits set by three different items causing a false positive for "Saffola Oil"](/images/bloom_filter_false_positives_svg.svg)
+![Bloom Filter false positive diagram — Panel A shows bits set by adding “Amul Ghee”; Panel B shows the same three bits set by three different items causing a false positive for “Saffola Oil”](/images/bloom_filter_false_positives_svg.svg)
 
 This asymmetry is the core property — and the reason Bloom Filters are used as a fast pre-filter before hitting a slower, accurate store (like a database or disk).
 
-### False positive probability
+### False Positive Probability
 
 The probability of a false positive after inserting $n$ items into a filter of size $m$ with $k$ hash functions is:
 
@@ -88,9 +88,9 @@ $$m = -\frac{n \ln p}{(\ln 2)^2}$$
 **Optimal number of hash functions ($k$):**
 $$k = \frac{m}{n} \ln 2$$
 
-### Worked example
+### Worked Example
 
-Say you're building a "have we seen this URL before?" cache for 1,000 items with a 1% false positive rate:
+Say you're building a “have we seen this URL before?” cache for 1,000 items with a 1% false positive rate:
 
 - $m = -\frac{1000 \times \ln(0.01)}{(\ln 2)^2} \approx 9{,}586$ bits — roughly **1.2 KB**
 - $k = \frac{9586}{1000} \times \ln 2 \approx 7$ hash functions
@@ -115,13 +115,13 @@ This is distinct from *double hashing* in the open-addressing hash table sense. 
 
 ## 5. Implementation: Step-by-Step
 
-### Core data structures
+### Core Data Structures
 
 - **`java.util.BitSet`** — our storage layer; far more memory-efficient than a `boolean[]` since it packs 64 bits per `long`.
 - **`int m`** — total number of bits in the filter.
 - **`int k`** — number of hash indices we compute per item.
 
-### Step 1 — The non-generic version
+### Step 1 — The Non-Generic Version
 
 Start simple: a filter that only handles `String` values. This isolates the hashing logic before we generalize.
 
@@ -163,7 +163,7 @@ public class BloomFilter {
 
 > **The sign-bit trap:** In Java, `Math.abs(Integer.MIN_VALUE)` returns `Integer.MIN_VALUE` — it stays negative because there's no positive counterpart in 32-bit signed integers. Using the raw value with `% m` would produce a negative index and throw an `ArrayIndexOutOfBoundsException`. The bitwise AND `& 0x7fffffff` clears only the sign bit, forcing the value positive without any branch or overflow risk.
 
-### Tracing a concrete add
+### Tracing a Concrete Add
 
 Let's trace `add("hello")` on a filter with `m=16`, `k=3`:
 
@@ -260,7 +260,7 @@ A Bloom Filter is powerful, but it has hard constraints that make it unsuitable 
 | Constraint | Detail |
 | :--- | :--- |
 | **No deletion** | You can't remove an item. Clearing a bit might unset a bit shared by another item, corrupting the filter. (Counting Bloom Filters solve this at the cost of more memory.) |
-| **No value retrieval** | The filter only stores membership signals, not the items themselves. You can't ask "what items are in this filter?" |
+| **No value retrieval** | The filter only stores membership signals, not the items themselves. You can't ask “what items are in this filter?” |
 | **False positive rate grows** | If you insert more items than the `n` you planned for, $P$ climbs above your target. The filter silently degrades — use `currentFalsePositiveRate()` to monitor this in production. |
 | **Hash quality matters** | Java's default `hashCode()` is not a cryptographic or uniformly distributed hash. For high-sensitivity use cases, consider wrapping objects with a stronger hash (e.g. MurmurHash via a library). |
 
