@@ -1,28 +1,18 @@
 <!-- Google Site Verification -->
-<meta
-  name="google-site-verification"
-  content="h6YkXcoQO9TJpWeCAmX0pbPlk3pQJlz67KxBeNVrEvM"
-/>
+<meta name="google-site-verification" content="h6YkXcoQO9TJpWeCAmX0pbPlk3pQJlz67KxBeNVrEvM" />
 
 <!-- Preconnect to Google Fonts for faster DNS/TLS resolution -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
 <!-- Load Google Fonts asynchronously to prevent render blocking -->
-<link
-  rel="preload"
-  as="style"
-  onload="
+<link rel="preload" as="style" onload="
     this.onload = null;
     this.rel = 'stylesheet';
-  "
-  href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-/>
+  " href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" />
 <noscript>
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-  />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" />
 </noscript>
 
 <!-- Optional: Add font-display swap in CSS for better FOUT handling -->
@@ -62,18 +52,17 @@
 
 <!-- Google Analytics -->
 {{- if .Site.Config.Services.GoogleAnalytics.ID }}
-<script
-  async
-  src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Config.Services.GoogleAnalytics.ID }}"
-></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Config.Services.GoogleAnalytics.ID }}"></script>
 <script>
   var doNotTrack = false;
   if (!doNotTrack) {
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', '{{ .Site.Config.Services.GoogleAnalytics.ID }}', { 'anonymize_ip': {{ .Site.Params.privacy.googleAnalytics.anonymizeIP }} });
   }
 </script>
 {{- end }}
 <!-- End Google Analytics -->
+
+{{ if .Params.math }}{{ partial "math.html" . }}{{ end }}
