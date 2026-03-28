@@ -29,7 +29,7 @@ cover:
 
 Ever wondered how Google tells you *instantly* that a username is already taken? Or how Chrome knows a URL is malicious before you even click it?
 
-Checking a database with billions of records for every single keystroke would be a latency nightmare. Instead, these systems use a compact probabilistic structure called a **Bloom Filter**, one that can definitively tell you something is *absent*, but can only say something *might* be present. Today I'm walking through how I built one from scratch in Java, from raw logic to a production-ready generic class — including the math, the non-obvious gotchas, and when you'd actually use this over Guava's built-in.
+Checking a database with billions of records for every single keystroke would be a latency nightmare. Instead, these systems use a compact probabilistic structure called a **Bloom Filter**, one that can definitively tell you something is *absent*, but can only say something *might* be present. Today I'm walking through how I built one from scratch in Java, from raw logic to a production-ready generic class, including the math, the non-obvious gotchas, and when you'd actually use this over Guava's built-in.
 
 ---
 
@@ -45,9 +45,9 @@ So you use a **“Jugaad” shortcut**: a small index card at the front counter.
 
 This gives you two possible outcomes when a customer asks for something:
 
-1. **The “Pakka No” (Definite No):** A customer asks for a rare brand of tea. You check the card — the **Red** stamp is missing. You know for a fact it's not there, without even walking to the back. *“Nahi hai, zepto karlo.”* You just saved 10 minutes of pointless searching.
+1. **The “Pakka No” (Definite No):** A customer asks for a rare brand of tea. You check the card: the **Red** stamp is missing. You know for a fact it's not there, without even walking to the back. *“Nahi hai, zepto karlo.”* You just saved 10 minutes of pointless searching.
 
-2. **The “Shaayad” (Maybe):** Another customer asks for “Saffola Oil.” All three stamps are present. It *might* be in the back. But you still have to go check — because the Red, Green, and Blue stamps might have been left behind by three *different* items you stocked earlier (say, Parle-G set Red, Papad set Green, and Dettol set Blue). That's a false positive — the card lied.
+2. **The “Shaayad” (Maybe):** Another customer asks for “Saffola Oil.” All three stamps are present. It *might* be in the back. But you still have to go check, because the Red, Green, and Blue stamps might have been left behind by three *different* items you stocked earlier (say, Parle-G set Red, Papad set Green, and Dettol set Blue). That's a false positive. The card lied.
 
 A Bloom Filter is exactly this card, implemented as a **bit array with multiple hash functions**.
 
@@ -62,11 +62,11 @@ The structure is a bit array of size $m$, initialized to all zeros. Adding an it
 - **ABSENT = CERTAIN:** If even one of the $k$ bits is `0`, the item was never added. It is *physically impossible* for it to be present, because adding it would have set that bit.
 - **PRESENT = MAYBE:** All $k$ bits are `1`, but those bits might have been flipped by a combination of *other* items. That's a false positive.
 
-The diagram below shows both scenarios. Panel A shows a true add: “Amul Ghee” sets bits 2, 6, and 11 via three hash functions. Panel B shows the false positive trap: three different items each happen to set one of those same bits. A query for “Saffola Oil” checks positions 2, 6, and 11 — finds all three at `1` — and incorrectly returns “maybe present.”
+The diagram below shows both scenarios. Panel A shows a true add: “Amul Ghee” sets bits 2, 6, and 11 via three hash functions. Panel B shows the false positive trap: three different items each happen to set one of those same bits. A query for “Saffola Oil” checks positions 2, 6, and 11, finds all three at `1`, and incorrectly returns “maybe present.”
 
-![Bloom Filter false positive diagram — Panel A shows bits set by adding “Amul Ghee”; Panel B shows the same three bits set by three different items causing a false positive for “Saffola Oil”](/images/bloom_filter_false_positives_svg.svg)
+![Bloom Filter false positive diagram: Panel A shows bits set by adding “Amul Ghee”; Panel B shows the same three bits set by three different items causing a false positive for “Saffola Oil”](/images/bloom_filter_false_positives_svg.svg)
 
-This asymmetry is the core property — and the reason Bloom Filters are used as a fast pre-filter before hitting a slower, accurate store (like a database or disk).
+This asymmetry is the core property, and the reason Bloom Filters are used as a fast pre-filter before hitting a slower, accurate store (like a database or disk).
 
 ### False Positive Probability
 
@@ -74,7 +74,7 @@ The probability of a false positive after inserting $n$ items into a filter of s
 
 $$P \approx \left(1 - e^{-kn/m}\right)^k$$
 
-This is what we're optimizing when we choose $m$ and $k$ — we want $P$ to stay below our acceptable error rate.
+This is what we're optimizing when we choose $m$ and $k$. We want $P$ to stay below our acceptable error rate.
 
 ---
 
@@ -92,7 +92,7 @@ $$k = \frac{m}{n} \ln 2$$
 
 Say you're building a “have we seen this URL before?” cache for 1,000 items with a 1% false positive rate:
 
-- $m = -\frac{1000 \times \ln(0.01)}{(\ln 2)^2} \approx 9{,}586$ bits — roughly **1.2 KB**
+- $m = -\frac{1000 \times \ln(0.01)}{(\ln 2)^2} \approx 9{,}586$ bits, roughly **1.2 KB**
 - $k = \frac{9586}{1000} \times \ln 2 \approx 7$ hash functions
 
 Compare that to storing 1,000 strings (averaging ~40 bytes each) = ~40 KB. The Bloom Filter uses **33× less memory**, with only a 1% chance of a false positive.
@@ -101,10 +101,10 @@ Compare that to storing 1,000 strings (averaging ~40 bytes each) = ~40 KB. The B
 
 ## 4. The Hashing Strategy
 
-We don't actually implement $k$ separate, complex hash algorithms. Instead, we use a technique from [Kirsch & Mitzenmacher (2008)](#references) — often called **hash function simulation** — which generates $k$ independent-looking indices from just two base hashes:
+We don't actually implement $k$ separate, complex hash algorithms. Instead, we use a technique from [Kirsch & Mitzenmacher (2008)](#references), often called **hash function simulation**, which generates $k$ independent-looking indices from just two base hashes:
 
 - **Primary hash ($h_1$):** `value.hashCode()`
-- **Secondary hash ($h_2$):** `Integer.rotateRight(h1, 16)` — scrambles the bits efficiently
+- **Secondary hash ($h_2$):** `Integer.rotateRight(h1, 16)`, which scrambles the bits efficiently
 - **Derived indices:** For each $i$ from $0$ to $k-1$:
 
 $$H_i(x) = (h_1 + i \times h_2) \pmod{m}$$
@@ -117,7 +117,7 @@ This is distinct from *double hashing* in the open-addressing hash table sense. 
 
 ### Core Data Structures
 
-- **`java.util.BitSet`** — our storage layer; far more memory-efficient than a `boolean[]` since it packs 64 bits per `long`.
+- **`java.util.BitSet`**: our storage layer; far more memory-efficient than a `boolean[]` since it packs 64 bits per `long`.
 - **`int m`** — total number of bits in the filter.
 - **`int k`** — number of hash indices we compute per item.
 
@@ -142,7 +142,7 @@ public class BloomFilter {
 
         for (int i = 0; i < k; i++) {
             int combinedHash = h1 + (i * h2);
-            // The & 0x7fffffff mask strips the sign bit — see callout below
+            // The & 0x7fffffff mask strips the sign bit (see callout below)
             int index = (combinedHash & 0x7fffffff) % m;
             bitSet.set(index);
         }
@@ -161,7 +161,7 @@ public class BloomFilter {
 }
 ```
 
-> **The sign-bit trap:** In Java, `Math.abs(Integer.MIN_VALUE)` returns `Integer.MIN_VALUE` — it stays negative because there's no positive counterpart in 32-bit signed integers. Using the raw value with `% m` would produce a negative index and throw an `ArrayIndexOutOfBoundsException`. The bitwise AND `& 0x7fffffff` clears only the sign bit, forcing the value positive without any branch or overflow risk.
+> **The sign-bit trap:** In Java, `Math.abs(Integer.MIN_VALUE)` returns `Integer.MIN_VALUE`; it stays negative because there's no positive counterpart in 32-bit signed integers. Using the raw value with `% m` would produce a negative index and throw an `ArrayIndexOutOfBoundsException`. The bitwise AND `& 0x7fffffff` clears only the sign bit, forcing the value positive without any branch or overflow risk.
 
 ### Tracing a Concrete Add
 
@@ -178,7 +178,7 @@ i=2: index = (99162322 + 3027354824) & 0x7fffffff % 16 = 11
 Bits set: [2, 6, 11]
 ```
 
-A subsequent `mightContain("hello")` recomputes the same three indices and confirms bits 2, 6, and 11 are all `1`. A word that hashes to indices [2, 5, 11] would return `false` immediately at bit 5 — a definite NO.
+A subsequent `mightContain("hello")` recomputes the same three indices and confirms bits 2, 6, and 11 are all `1`. A word that hashes to indices [2, 5, 11] would return `false` immediately at bit 5, a definite NO.
 
 ---
 
@@ -239,7 +239,7 @@ public class BloomFilter<T> {
 }
 ```
 
-**Key change from the non-generic version:** The constructor now takes `n` and `p` — the user declares their intent, and the filter derives its own optimal `m` and `k`. You no longer have to manually calculate these and pass them in correctly.
+**Key change from the non-generic version:** The constructor now takes `n` and `p`. The user declares their intent, and the filter derives its own optimal `m` and `k`. You no longer have to manually calculate these and pass them in correctly.
 
 **Usage:**
 ```java
@@ -261,7 +261,7 @@ A Bloom Filter is powerful, but it has hard constraints that make it unsuitable 
 | :--- | :--- |
 | **No deletion** | You can't remove an item. Clearing a bit might unset a bit shared by another item, corrupting the filter. (Counting Bloom Filters solve this at the cost of more memory.) |
 | **No value retrieval** | The filter only stores membership signals, not the items themselves. You can't ask “what items are in this filter?” |
-| **False positive rate grows** | If you insert more items than the `n` you planned for, $P$ climbs above your target. The filter silently degrades — use `currentFalsePositiveRate()` to monitor this in production. |
+| **False positive rate grows** | If you insert more items than the `n` you planned for, $P$ climbs above your target. The filter silently degrades. Use `currentFalsePositiveRate()` to monitor this in production. |
 | **Hash quality matters** | Java's default `hashCode()` is not a cryptographic or uniformly distributed hash. For high-sensitivity use cases, consider wrapping objects with a stronger hash (e.g. MurmurHash via a library). |
 
 ---
@@ -288,20 +288,20 @@ For most production Java services, Guava's `BloomFilter` is the right call. The 
 
 | Operation | Time Complexity | Space |
 | :--- | :--- | :--- |
-| `add(value)` | $O(k)$ | $O(1)$ additional — bits are set in the existing array |
-| `mightContain(value)` | $O(k)$ | $O(1)$ additional — no allocation |
-| Construction | $O(m)$ | $O(m)$ bits — the bit array itself |
+| `add(value)` | $O(k)$ | $O(1)$ additional, bits are set in the existing array |
+| `mightContain(value)` | $O(k)$ | $O(1)$ additional, no allocation |
+| Construction | $O(m)$ | $O(m)$ bits: the bit array itself |
 
-$k$ is typically a small constant (6–10 for common configurations), so both `add` and `mightContain` are effectively $O(1)$ in practice. The memory footprint is $m$ bits — for the 1,000-item / 1% error example above, that's under 1.2 KB, regardless of how large the inserted strings are.
+$k$ is typically a small constant (6–10 for common configurations), so both `add` and `mightContain` are effectively $O(1)$ in practice. The memory footprint is $m$ bits (for the 1,000-item / 1% error example above, that's under 1.2 KB) regardless of how large the inserted strings are.
 
 ---
 
 ## References
 
-1. **Bloom, B. H. (1970).** *Space/Time Trade-offs in Hash Coding with Allowable Errors.* Communications of the ACM, 13(7), 422–426. — The original paper introducing the structure.
+1. **Bloom, B. H. (1970).** *Space/Time Trade-offs in Hash Coding with Allowable Errors.* Communications of the ACM, 13(7), 422–426. The original paper introducing the structure.
 
-2. **Kirsch, A., & Mitzenmacher, M. (2008).** *Less Hashing, Same Performance: Building a Better Bloom Filter.* Random Structures & Algorithms, 33(2), 187–218. — The source for the two-hash simulation technique used here.
+2. **Kirsch, A., & Mitzenmacher, M. (2008).** *Less Hashing, Same Performance: Building a Better Bloom Filter.* Random Structures & Algorithms, 33(2), 187–218. The source for the two-hash simulation technique used here.
 
-3. **Google Guava `BloomFilter` source** — [github.com/google/guava](https://github.com/google/guava/blob/master/guava/src/com/google/common/hash/BloomFilter.java) — worth reading after you've built your own.
+3. **Google Guava `BloomFilter` source**: [github.com/google/guava](https://github.com/google/guava/blob/master/guava/src/com/google/common/hash/BloomFilter.java), worth reading after you've built your own.
 
 ---
