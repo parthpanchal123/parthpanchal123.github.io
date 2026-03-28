@@ -9,8 +9,8 @@ TocOpen: false
 draft: false
 hidemeta: false
 comments: false
-description: "A deep dive into implementing a space-efficient probabilistic data structure from scratch in Java — covering the math, the code, the gotchas, and when to use one in production."
-canonicalURL: "https://parthpanchal123.github.io/blog/bloom-filter-from-scratch"
+description: "A deep dive into building a space-efficient Bloom Filter from scratch in Java—covering the math, core code, gotchas, and when to use it in production."
+canonicalURL: "https://parthpanchal123.github.io/blog/bloom-filter-from-scratch/"
 disableHLJS: false
 disableShare: false
 hideSummary: false
@@ -24,7 +24,7 @@ cover:
     image: "/images/bloom_filter_cover.svg"
     alt: "Bloom Filter Visualization"
     caption: "The magic of probabilistic data structures."
-    relative: true
+    relative: false
 ---
 
 Ever wondered how Google tells you *instantly* that a username is already taken? Or how Chrome knows a URL is malicious before you even click it?
