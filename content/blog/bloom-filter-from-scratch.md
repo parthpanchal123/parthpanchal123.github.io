@@ -167,7 +167,7 @@ public class BloomFilter {
 
 Let's trace `add("hello")` on a filter with `m=16`, `k=3`:
 
-```
+```text
 h1 = "hello".hashCode()        = 99162322
 h2 = Integer.rotateRight(h1,16) = 1513677412  (approximate)
 

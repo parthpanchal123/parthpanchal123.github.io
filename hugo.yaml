@@ -47,7 +47,7 @@ params:
   images: ["images/og-fallback.png"]
   DateFormat: "January 2, 2006"
   defaultTheme: auto
-  disableThemeToggle: falsea
+  disableThemeToggle: false
   math: true
   
   # UI Features
