@@ -9,7 +9,7 @@ TocOpen: false
 draft: false
 hidemeta: false
 comments: false
-description: "A deep dive into building a space-efficient Bloom Filter from scratch in Java—covering the math, core code, gotchas, and when to use it in production."
+description: "A deep dive into building a space-efficient Bloom Filter from scratch in Java, covering the math, core code, gotchas, and when to use it in production."
 canonicalURL: "https://parthpanchal123.github.io/blog/bloom-filter-from-scratch/"
 disableHLJS: false
 disableShare: false
@@ -29,13 +29,13 @@ cover:
 
 Ever wondered how Google tells you *instantly* that a username is already taken? Or how Chrome knows a URL is malicious before you even click it?
 
-Checking a database with billions of records for every single keystroke would be a latency nightmare. Instead, these systems use a compact probabilistic structure called a **Bloom Filter** — one that can definitively tell you something is *absent*, but can only say something *might* be present. Today I'm walking through how I built one from scratch in Java, from raw logic to a production-ready generic class — including the math, the non-obvious gotchas, and when you'd actually use this over Guava's built-in.
+Checking a database with billions of records for every single keystroke would be a latency nightmare. Instead, these systems use a compact probabilistic structure called a **Bloom Filter**, one that can definitively tell you something is *absent*, but can only say something *might* be present. Today I'm walking through how I built one from scratch in Java, from raw logic to a production-ready generic class — including the math, the non-obvious gotchas, and when you'd actually use this over Guava's built-in.
 
 ---
 
 ## 1. What is a Bloom Filter?
 
-To understand why this structure exists, think about the analogy first — then we'll look at the mechanism.
+To understand why this structure exists, think about the analogy first,then we'll look at the mechanism.
 
 ### The Kirana Store Analogy
 
