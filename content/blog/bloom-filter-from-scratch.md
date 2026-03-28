@@ -21,7 +21,7 @@ ShowPostNavLinks: true
 ShowCodeCopyButtons: true
 math: true
 cover:
-    image: "/images/bloom_filter_cover.svg"
+    image: "/images/bloom_filter_cover.webp"
     alt: "Bloom Filter Visualization"
     caption: "The magic of probabilistic data structures."
     relative: false
