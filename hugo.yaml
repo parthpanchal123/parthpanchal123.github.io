@@ -79,6 +79,7 @@ params:
     Content: |
       #### An Engineer during the week, artist by the weekend.
       Welcome to my personal archive of **_tech_**, **_art_**, and **_photography_**.
+      <br><br><span style="opacity: 0.7; font-size: 0.9em; display: inline-flex; align-items: center; gap: 4px;">✨ Press <kbd>Cmd</kbd> / <kbd>Ctrl</kbd> + <kbd>K</kbd> to explore</span>
 
   # Social Icons
   socialIcons:

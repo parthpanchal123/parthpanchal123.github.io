@@ -1,0 +1,155 @@
+<!-- NinjaKeys Command Palette -->
+<script type="module" src="https://unpkg.com/ninja-keys?module"></script>
+<ninja-keys placeholder="Type a command or search..."></ninja-keys>
+
+<style>
+  ninja-keys {
+    /* Map PaperMod CSS variables to NinjaKeys */
+    /* Use an RGBA version of PaperMod's background if possible, or fallback to semi-transparent */
+    --ninja-background: rgba(30, 30, 30, 0.75);
+    --ninja-text-color: var(--primary);
+    --ninja-secondary-text-color: var(--secondary);
+    --ninja-selected-background: rgba(80, 80, 80, 0.3);
+    --ninja-selected-text-color: var(--primary);
+    --ninja-icon-color: var(--secondary);
+    --ninja-accent-color: #3b82f6; /* Modern Blue */
+    
+    /* Darken the background of the screen */
+    --ninja-overflow-background: rgba(0, 0, 0, 0.7);
+    --ninja-border-radius: 12px;
+    font-family: inherit;
+  }
+  
+  /* When dark mode is active, override with dark-mode specific glassmorphism colors */
+  html[data-theme="dark"] ninja-keys, ninja-keys.dark {
+     --ninja-background: rgba(30, 30, 32, 0.75);
+     --ninja-selected-background: rgba(60, 60, 65, 0.5);
+  }
+
+  /* Apply the actual blur to the modal component */
+  ninja-keys::part(dialog) {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(50px) saturate(150%);
+    -webkit-backdrop-filter: blur(50px) saturate(150%);
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const ninja = document.querySelector('ninja-keys');
+    
+    // Core navigation points
+    const coreCommands = [
+      {
+        id: 'home',
+        title: 'Home',
+        section: 'Navigation',
+        icon: '🏠',
+        handler: () => { window.location.href = '/'; }
+      },
+      {
+        id: 'blog',
+        title: 'Tech Blog',
+        section: 'Navigation',
+        icon: '💻',
+        handler: () => { window.location.href = '/blog/'; }
+      },
+      {
+        id: 'photography',
+        title: 'Photography',
+        section: 'Navigation',
+        icon: '📷',
+        handler: () => { window.location.href = '/gallery/'; }
+      },
+      {
+        id: 'sketches',
+        title: 'Art Sketches',
+        section: 'Navigation',
+        icon: '🎨',
+        handler: () => { window.location.href = '/sketches/'; }
+      },
+      {
+        id: 'about',
+        title: 'About Parth',
+        section: 'Navigation',
+        icon: '👋',
+        handler: () => { window.location.href = '/about/'; }
+      },
+      {
+        id: 'theme',
+        title: 'Toggle Dark/Light Mode',
+        section: 'Actions',
+        icon: '🌓',
+        handler: () => { 
+            const html = document.querySelector("html");
+            if (html.dataset.theme === "dark") {
+                html.dataset.theme = 'light';
+                localStorage.setItem("pref-theme", 'light');
+            } else {
+                html.dataset.theme = 'dark';
+                localStorage.setItem("pref-theme", 'dark');
+            }
+        }
+      },
+      {
+        id: 'github',
+        title: 'GitHub',
+        section: 'Socials',
+        icon: '🔗',
+        handler: () => { window.open('https://github.com/parthpanchal123', '_blank'); }
+      },
+      {
+        id: 'twitter',
+        title: 'Twitter / X',
+        section: 'Socials',
+        icon: '🔗',
+        handler: () => { window.open('https://x.com/im_parth_24', '_blank'); }
+      }
+    ];
+
+    ninja.data = coreCommands;
+
+    // Fetch site index for search
+    fetch('/index.json')
+      .then(res => res.json())
+      .then(data => {
+        const searchCommands = data.map(item => ({
+          id: item.permalink,
+          title: item.title,
+          section: 'Search',
+          icon: '📄',
+          handler: () => {
+            window.location.href = item.permalink;
+          }
+        }));
+        
+        // Append search results to the core commands
+        ninja.data = [...coreCommands, ...searchCommands];
+      })
+      .catch(err => console.error("Error loading search index for command palette:", err));
+      
+      // Intercept clicks on the Search menu item to open the palette instead
+      document.querySelectorAll('a[href="/search/"]').forEach(el => {
+          el.addEventListener('click', (e) => {
+              e.preventDefault();
+              ninja.open();
+          });
+      });
+      
+      // Sync PaperMod's data-theme with Ninja-Keys .dark class
+      const htmlElement = document.querySelector('html');
+      
+      const syncTheme = () => {
+          const isDark = htmlElement.dataset.theme === 'dark';
+          ninja.classList.toggle('dark', isDark);
+      };
+      
+      // Initial sync
+      syncTheme();
+      
+      // Watch for changes when the user clicks the theme toggle button
+      const observer = new MutationObserver(syncTheme);
+      observer.observe(htmlElement, { attributes: true, attributeFilter: ['data-theme', 'class'] });
+  });
+</script>
