@@ -8,7 +8,7 @@ showToc: true
 TocOpen: false
 draft: false
 hidemeta: false
-comments: false
+comments: true
 description: "A deep dive into building a space-efficient Bloom Filter from scratch in Java, covering the math, core code, gotchas, and when to use it in production."
 canonicalURL: "https://parthpanchal123.github.io/blog/bloom-filter-from-scratch/"
 disableHLJS: false

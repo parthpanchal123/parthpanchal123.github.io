@@ -44,6 +44,7 @@ params:
   description: "Systems Engineer, Photographer, and Artist. Documenting life via clean code, street photography, and creative art."
   keywords: [Blog, Portfolio, PaperMod, Tech, Photography, Art]
   author: "Parth Panchal"
+  comments: true
   images: ["images/og-fallback.png"]
   DateFormat: "January 2, 2006"
   defaultTheme: auto
