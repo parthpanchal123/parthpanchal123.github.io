@@ -152,3 +152,9 @@ markup:
       unsafe: true
   highlight:
     noClasses: false
+
+# --- Sitemap ---
+sitemap:
+  changeFreq: "weekly"
+  priority: 0.5
+  filename: "sitemap.xml"

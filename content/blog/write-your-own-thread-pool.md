@@ -2,9 +2,13 @@
 date: "2026-01-09T22:51:59+05:30"
 draft: false
 title: "Write your own Thread Pool in Java 🧵"
+description: "Learn how Java's ExecutorService works under the hood by building a custom thread pool from scratch, complete with blocking queues, worker threads, and the poison pill shutdown pattern."
 summary: "Nahh , I'll just use ExecutorService . Okay but still hear me out :)"
+author: "Parth Panchal"
+canonicalURL: "https://parthpanchal123.github.io/blog/write-your-own-thread-pool/"
 cover:
   image: "/images/thread-pool-blog.webp"
+  alt: "Custom thread pool architecture diagram showing worker threads processing tasks from a blocking queue"
 tags:
   [
     "java",
@@ -39,6 +43,8 @@ This works fine for a few customers, but when rush hour hits (read: high concurr
 ## The Solution: A Thread Pool (Your Tapri Manager) ☕
 
 A thread pool is like having a fixed team of chaiwalas who stay on the job. Customers (tasks) wait in a queue, and when a chaiwala (worker thread) finishes an order, they immediately pick up the next one. Efficient, predictable, and scalable - just like a well-run tapri during morning rush hour!
+
+*(This producer-consumer pattern is exactly the kind of foundational architecture that powers frameworks like Spring. Want to see another DIY Java framework? Check out how I [built a mini Spring Framework from scratch](../write-your-own-spring-framework/) using reflection and HashMaps.)*
 
 Let me show you how to build one from scratch.
 
@@ -166,7 +172,7 @@ pool.shutDown(); // Close tapri gracefully (no chai left behind!)
 
 ### Output
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1767519605200/f36146a4-132c-4350-86b8-e02e64304d68.png align="center")
+![Thread pool terminal output showing tasks being processed by worker threads](https://cdn.hashnode.com/res/hashnode/image/upload/v1767519605200/f36146a4-132c-4350-86b8-e02e64304d68.png)
 
 ## Why This Matters 🎯
 
@@ -180,6 +186,8 @@ Building a thread pool from scratch teaches you:
 ## The Real World 🌍
 
 In production, you'd use Java's `ExecutorService` (which is battle-tested and optimized), but understanding the internals makes you a better developer. It's like learning to drive a manual car - you might use automatic, but you understand what's happening under the hood.
+
+*Thread pools handle concurrency, but what happens when the services your threads call start failing? That's where a [Circuit Breaker](../write-your-own-circuit-breaker/) comes in — it prevents your pool from wasting workers on broken endpoints.*
 
 ## Key Takeaways 💡
 

@@ -2,9 +2,13 @@
 date: "2026-01-17T14:36:57+05:30"
 draft: false
 title: "Write your own Spring Framework ♨️"
+description: "Build a mini version of the Spring Framework from scratch in Java to understand Inversion of Control, Dependency Injection, and bean lifecycle management."
 summary: "Unveil the magic behind IOC and Dependency Injection."
+author: "Parth Panchal"
+canonicalURL: "https://parthpanchal123.github.io/blog/write-your-own-spring-framework/"
 cover:
   image: "/images/spring-blog-cover.png"
+  alt: "Mini Spring Framework architecture showing IoC container, dependency injection, and bean management"
 tags:
   [
     "java",
@@ -93,6 +97,8 @@ This is the **Bauji** (Big Boss). He does three main jobs:
 1.  **Scan**: Searches your package for anyone wearing the `@MyService` badge. 🕵️
 2.  **Register**: Keeps a note of everyone in his _khata_.
 3.  **Inject**: Connects the families (objects) using **Reflection**. _Rishta pakka!_ 🤝
+
+*Reflection and thread safety are two pillars of real-world Java. If you want to dive deeper into the concurrency side, check out my post on [building a thread pool from scratch](../write-your-own-thread-pool/).*
 
 ---
 
@@ -220,7 +226,7 @@ All dependencies are already resolved. The lights turn on.
 
 ## Output
 
-![Terminal Output](/images/spring-output.png)
+![Mini Spring Framework terminal output showing bean scanning, singleton instantiation, and dependency injection](/images/spring-output.png)
 
 ### 📝 Decoding the Output:
 

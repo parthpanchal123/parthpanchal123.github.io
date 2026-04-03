@@ -1,7 +1,7 @@
 ---
 title: "From ‘Definitely Not’ to ‘Maybe’: Building a Bloom Filter in Java"
 date: 2026-03-28
-tags: ["Java", "Data Structures", "Algorithms", "System Design"]
+tags: ["java", "data-structures", "algorithms", "system-design"]
 categories: ["Engineering"]
 author: "Parth Panchal"
 showToc: true
@@ -67,6 +67,8 @@ The diagram below shows both scenarios. Panel A shows a true add: “Amul Ghee�
 ![Bloom Filter false positive diagram: Panel A shows bits set by adding “Amul Ghee”; Panel B shows the same three bits set by three different items causing a false positive for “Saffola Oil”](/images/bloom_filter_false_positives_svg.svg)
 
 This asymmetry is the core property, and the reason Bloom Filters are used as a fast pre-filter before hitting a slower, accurate store (like a database or disk).
+
+*Bloom Filters protect your database from unnecessary reads. For protecting against failing *services*, the [Circuit Breaker pattern](../write-your-own-circuit-breaker/) is the equivalent safeguard — it short-circuits calls to unhealthy endpoints before they waste resources.*
 
 ### False Positive Probability
 
@@ -293,6 +295,8 @@ For most production Java services, Guava's `BloomFilter` is the right call. The 
 | Construction | $O(m)$ | $O(m)$ bits: the bit array itself |
 
 $k$ is typically a small constant (6–10 for common configurations), so both `add` and `mightContain` are effectively $O(1)$ in practice. The memory footprint is $m$ bits (for the 1,000-item / 1% error example above, that's under 1.2 KB) regardless of how large the inserted strings are.
+
+*When you need to check membership across millions of items concurrently, pairing a Bloom Filter with a [custom thread pool](../write-your-own-thread-pool/) gives you both speed and parallelism.*
 
 ---
 

@@ -2,9 +2,13 @@
 date: "2026-01-09T22:51:59+05:30"
 draft: false
 title: "Write your own Circuit Breaker in Java🔌⛓️‍💥"
+description: "Implement the Circuit Breaker design pattern from scratch in Java with thread-safe state transitions, rolling failure windows, and graceful fallbacks for resilient microservices."
 summary: "Because Services Fail (And That's Okay!)"
+author: "Parth Panchal"
+canonicalURL: "https://parthpanchal123.github.io/blog/write-your-own-circuit-breaker/"
 cover:
   image: "/images/circuit-breaker-blog.webp"
+  alt: "Circuit breaker pattern diagram showing closed, open, and half-open states"
 tags:
   [
     "java",
@@ -159,6 +163,8 @@ Since multiple threads might be calling this at the same time, we need to be car
 
 It's like having a bouncer who can handle multiple people trying to get in at once - organized chaos!
 
+*These are the same concurrency primitives I used when [building a custom thread pool](../write-your-own-thread-pool/) — `BlockingQueue`, `AtomicLong`, and `volatile` all play starring roles there too.*
+
 ### The Rolling Window Magic
 
 One cool thing is the "rolling window" for failures. We don't just count failures forever - we only care about recent ones. Old failures get pruned:
@@ -199,7 +205,7 @@ String result = circuitBreaker.execute(unreliableCall, fallback);
 
 ## Output
 
-![Terminal Output](/images/circuit-breaker-output.png)
+![Circuit breaker terminal output showing state transitions from CLOSED to OPEN to HALF_OPEN with failure counts and fallback responses](/images/circuit-breaker-output.png)
 
 What happens:
 
@@ -221,6 +227,8 @@ Circuit Breakers are everywhere in modern distributed systems:
 - **User Experience**: Users get fallback responses instead of long waits
 
 It's like having a smart assistant who knows when to stop trying and use Plan B.
+
+*For another approach to avoiding expensive operations, check out how [Bloom Filters](../bloom-filter-from-scratch/) use probabilistic data structures to skip unnecessary database lookups entirely — a different kind of pre-filter for a different kind of problem.*
 
 ## The Takeaway
 

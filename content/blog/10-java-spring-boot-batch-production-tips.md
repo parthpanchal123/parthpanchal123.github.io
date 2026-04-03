@@ -2,10 +2,15 @@
 date: '2026-01-25T13:18:56+05:30'
 draft: false
 title: '10 Java Spring Boot & Batch Production Tips 🚀'
+description: "10 actionable tips for production-ready Spring Boot and Spring Batch apps — covering CRaC instant startup, String deduplication, graceful shutdowns, JFR profiling, and more."
 summary: "Boost your production game with these 10 actionable Spring Boot and Batch tips. From CRaC to String Deduplication, we cover the essentials."
+author: "Parth Panchal"
+canonicalURL: "https://parthpanchal123.github.io/blog/10-java-spring-boot-batch-production-tips/"
 tags: ["java", "spring-boot", "spring-batch", "production", "performance", "tips"]
+comments: true
 cover:
   image: "/images/top-10-java-spring-boot-batch-tips-cover.png"
+  alt: "Infographic showing 10 Java Spring Boot and Batch production tips for performance, reliability, and developer experience"
 ---
 
 Preparing a Spring Boot application for production is more than just `mvn clean install`. It's about resilience, observability, and squeezing out every bit of performance.
@@ -55,6 +60,8 @@ By default, Spring initializes beans strictly sequentially. If you have heavy be
 
 **Why use it?**
 Shaves off valuable seconds from your startup time by utilizing available CPU cores.
+
+*(Parallel initialization uses thread pools internally. If you want to understand exactly how worker threads manage tasks, see my deep-dive on [building a thread pool from scratch](../write-your-own-thread-pool/).)*
 
 **How to use:**
 Set just one property in `application.properties`:
