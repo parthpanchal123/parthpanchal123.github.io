@@ -1,0 +1,75 @@
+{{- $posts := where site.RegularPages "Section" "blog" -}}
+{{- if gt (len $posts) 0 -}}
+{{- $build := slice -}}
+{{- $systems := slice -}}
+{{- $production := slice -}}
+{{- range $posts -}}
+{{- $title := lower .Title -}}
+{{- $tags := .Params.tags | default (slice) -}}
+{{- if or (in $title "write your own") (in $title "building") -}}
+{{- $build = $build | append . -}}
+{{- end -}}
+{{- if and (in $tags "java") (or (in $tags "concurrency") (in $tags "system-design") (in $tags "data-structures")) -}}
+{{- $systems = $systems | append . -}}
+{{- end -}}
+{{- if or (in $tags "production") (or (in $tags "performance") (in $tags "tips")) -}}
+{{- $production = $production | append . -}}
+{{- end -}}
+{{- end -}}
+
+<section class="blog-discovery" aria-labelledby="blog-discovery-title">
+  <div class="blog-discovery__header">
+    <div>
+      <p class="blog-discovery__eyebrow">Reading map</p>
+      <h2 id="blog-discovery-title">Choose a trail</h2>
+    </div>
+    <a class="blog-discovery__rss" href="/blog/index.xml">RSS</a>
+  </div>
+
+  <div class="blog-discovery__grid">
+    {{- if gt (len $build) 0 }}
+    {{- $latest := index $build 0 }}
+    <a class="blog-series-card" href="{{ $latest.RelPermalink }}">
+      <span class="blog-series-card__count">{{ len $build }} posts</span>
+      <strong>Build from scratch</strong>
+      <span>Frameworks, patterns, and data structures rebuilt from first principles.</span>
+      <em>Latest: {{ $latest.Title }}</em>
+    </a>
+    {{- end }}
+
+    {{- if gt (len $systems) 0 }}
+    {{- $latest := index $systems 0 }}
+    <a class="blog-series-card" href="{{ $latest.RelPermalink }}">
+      <span class="blog-series-card__count">{{ len $systems }} posts</span>
+      <strong>Java systems</strong>
+      <span>Concurrency, performance, and the mechanics behind backend code.</span>
+      <em>Latest: {{ $latest.Title }}</em>
+    </a>
+    {{- end }}
+
+    {{- if gt (len $production) 0 }}
+    {{- $latest := index $production 0 }}
+    <a class="blog-series-card" href="{{ $latest.RelPermalink }}">
+      <span class="blog-series-card__count">{{ len $production }} posts</span>
+      <strong>Production notes</strong>
+      <span>Practical Spring Boot and Batch tips for services that have to behave.</span>
+      <em>Latest: {{ $latest.Title }}</em>
+    </a>
+    {{- end }}
+  </div>
+
+  {{- with site.Taxonomies.tags }}
+  <div class="blog-tags-strip" aria-label="Popular tags">
+    {{- range first 10 .ByCount }}
+    {{- $count := .Count -}}
+    {{- with site.GetPage (printf "/tags/%s" .Name) }}
+    <a href="{{ .RelPermalink }}">
+      {{ .LinkTitle }}
+      <span>{{ $count }}</span>
+    </a>
+    {{- end }}
+    {{- end }}
+  </div>
+  {{- end }}
+</section>
+{{- end -}}

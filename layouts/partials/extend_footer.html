@@ -32,4 +32,29 @@
     })();
 </script>
 
+<script>
+    (function () {
+        var progress = document.querySelector('[data-reading-progress]');
+        var article = document.querySelector('.post-single');
+        if (!progress || !article) return;
+
+        function updateReadingProgress() {
+            var rect = article.getBoundingClientRect();
+            var articleTop = window.scrollY + rect.top;
+            var articleHeight = article.offsetHeight;
+            var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+            var readableDistance = Math.max(articleHeight - viewportHeight, 1);
+            var current = window.scrollY - articleTop;
+            var percent = Math.max(0, Math.min(100, (current / readableDistance) * 100));
+
+            progress.style.setProperty('--reading-progress', percent + '%');
+        }
+
+        updateReadingProgress();
+        window.addEventListener('scroll', updateReadingProgress, { passive: true });
+        window.addEventListener('resize', updateReadingProgress);
+        window.addEventListener('load', updateReadingProgress);
+    })();
+</script>
+
 {{ partial "command_palette.html" . }}
