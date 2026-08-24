@@ -1,0 +1,33 @@
+{{- $current := . -}}
+{{- $section := .Section -}}
+{{- $currentTags := .Params.tags | default (slice) -}}
+{{- $related := slice -}}
+{{- if gt (len $currentTags) 0 -}}
+{{- range where site.RegularPages "Section" $section -}}
+{{- $pageTags := .Params.tags | default (slice) -}}
+{{- if and (ne .RelPermalink $current.RelPermalink) (gt (len (intersect $pageTags $currentTags)) 0) -}}
+{{- $related = $related | append . -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
+{{- if gt (len $related) 0 -}}
+<section class="post-recommendations" aria-labelledby="post-recommendations-title">
+  <p class="post-recommendations__eyebrow">Related notes</p>
+  <h2 id="post-recommendations-title">Keep following this thread</h2>
+  <div class="post-recommendations__grid">
+    {{- range first 3 $related }}
+    <a class="post-recommendation-card" href="{{ .RelPermalink }}">
+      <span class="post-recommendation-card__meta">
+        {{- with .Date }}{{ .Format "Jan 2, 2006" }}{{ end -}}
+        {{- with .ReadingTime }} · {{ . }} min{{ end -}}
+      </span>
+      <strong>{{ .Title }}</strong>
+      {{- with .Summary }}
+      <span class="post-recommendation-card__summary">{{ . | plainify | htmlUnescape | truncate 120 }}</span>
+      {{- end }}
+    </a>
+    {{- end }}
+  </div>
+</section>
+{{- end -}}

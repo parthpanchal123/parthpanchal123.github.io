@@ -1,0 +1,13 @@
+# Hugo generated output
+/public/
+/public_tmp/
+/resources/_gen/
+/.hugo_build.lock
+
+# Temporary browser downloads
+*.crdownload
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
